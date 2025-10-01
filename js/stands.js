@@ -1,76 +1,59 @@
-// Función para cargar las medidas desde la base de datos
+// Funcion para cargar las medidas desde la base de datos
 function cargarMedidas() {
-    // Mostramos en consola que estamos intentando cargar
-    console.log('Intentando cargar medidas...');
-    
-    // Hacer la petición al PHP
-    fetch('php/obtener_medidas.php')
+    // Hacer peticion al servidor para obtener las medidas
+    fetch('/standex-despiece/php/obtener_medidas.php')
         .then(function(response) {
-            // Mostrar la respuesta completa para debug
-            console.log('Respuesta recibida:', response);
-            
-            // Convertir la respuesta a texto primero para ver qué recibimos
-            return response.text();
+            // Convertir la respuesta a JSON
+            return response.json();
         })
-        .then(function(text) {
-            // Mostrar el texto recibido
-            console.log('Texto recibido:', text);
+        .then(function(medidas) {
+            // Buscar el elemento select en el HTML
+            const select = document.getElementById('medidaSelect');
             
-            try {
-                // Intentar convertir el texto a JSON
-                const medidas = JSON.parse(text);
-                console.log('Medidas parseadas:', medidas);
-                
-                // Obtener el select
-                const select = document.getElementById('medidaSelect');
-                
-                // Limpiar opciones existentes
-                select.innerHTML = '<option value="">Seleccione una medida...</option>';
-                
-                // Agregar cada medida como una opción
-                medidas.forEach(function(medida) {
-                    const option = document.createElement('option');
-                    option.value = medida.id;
-                    option.textContent = medida.descripcion;
-                    select.appendChild(option);
-                });
-            } catch (error) {
-                console.error('Error al procesar JSON:', error);
-            }
+            // Limpiar el select
+            select.innerHTML = '<option value="">Seleccione una medida...</option>';
+            
+            // Agregar cada medida como una opcion en el select
+            medidas.forEach(function(medida) {
+                const option = document.createElement('option');
+                option.value = medida.id;
+                option.textContent = medida.descripcion;
+                select.appendChild(option);
+            });
         })
         .catch(function(error) {
             console.error('Error al cargar medidas:', error);
         });
 }
 
-// Función para validar el número de stands
+// Funcion para validar que el numero sea mayor a cero
 function validarNumero(input) {
-    // Obtener el valor del input
     const valor = input.value;
     const mensajeError = document.getElementById('numError');
     
-    // Verificar si es un número positivo
+    // Si el numero es menor o igual a cero, mostrar error
     if (valor <= 0 || isNaN(valor)) {
         mensajeError.style.display = 'block';
-        input.value = ''; // Limpiar el input
+        input.value = '';
     } else {
         mensajeError.style.display = 'none';
     }
 }
 
-// Función para guardar los datos
+// Funcion para guardar los datos cuando se presiona el boton
 function guardarDatos() {
     const medida = document.getElementById('medidaSelect').value;
     const numStands = document.getElementById('numStands').value;
     
+    // Verificar que ambos campos tengan valor
     if (!medida || !numStands) {
         alert('Por favor completa todos los campos');
         return;
     }
     
-    // Aquí puedes agregar el código para guardar los datos
+    // Aqui puedes enviar los datos al servidor
     console.log('Medida seleccionada:', medida);
-    console.log('Número de stands:', numStands);
+    console.log('Numero de stands:', numStands);
     
     // Cerrar el modal
     const modal = bootstrap.Modal.getInstance(document.getElementById('infoModal'));
@@ -87,43 +70,43 @@ document.querySelectorAll('.cell').forEach(cell => {
         let description = '';
         switch(standType) {
             case 'CTU':
-                description = 'Cabecera de Tren en U - Pieza especial que forma la cabecera en forma de U';
+                description = 'Cabecera de Tren en U - Pieza especial que forma la cabecera en forma de U - CTU';
                 break;
             case 'CTL':
-                description = 'Cabecera de Tren en L - Pieza especial que forma la cabecera en forma de L';
+                description = 'Cabecera de Tren en L - Pieza especial que forma la cabecera en forma de L - CTL';
                 break;
             case 'ST':
-                description = 'Stands en Tren - Pieza estándar que forma parte del tren de stands';
+                description = 'Stands en Tren - Pieza estándar que forma parte del tren de stands - ST';
                 break;
             case 'VTL':
-                description = 'Vuelta Tren en L - Pieza especial para hacer giros en L';
+                description = 'Vuelta Tren en L - Pieza especial para hacer giros en L - VTL';
                 break;
             case 'VTU':
-                description = 'Vuelta Tren en U - Pieza especial para hacer giros en U';
+                description = 'Vuelta Tren en U - Pieza especial para hacer giros en U - VTU';
                 break;
             case 'VTI':
-                description = 'Tren en Vuelta - Pieza de transición para giros';
+                description = 'Tren en Vuelta - Pieza de transición para giros - VTI';
                 break;
             case 'FT':
-                description = 'Final de Tren - Pieza que marca el final de un tren de stands';
+                description = 'Final de Tren - Pieza que marca el final de un tren de stands - FT';
                 break;
             case 'EI':
-                description = 'Esquina de Isla - Pieza especial para las esquinas de islas';
+                description = 'Esquina de Isla - Pieza especial para las esquinas de islas - EI';
                 break;
             case 'II':
-                description = 'Intermedio de Isla - Pieza estándar para las islas';
+                description = 'Intermedio de Isla - Pieza estándar para las islas - II';
                 break;
             case 'IT':
-                description = 'Intermedio de Tren - Pieza de conexión entre stands';
+                description = 'Intermedio de Tren - Pieza de conexión entre stands - IT';
                 break;
             case 'VIT':
-                description = 'Vuelta Intermedio de Tren - Pieza de transición para giros intermedios';
+                description = 'Vuelta Intermedio de Tren - Pieza de transición para giros intermedios - VIT';
                 break;
             case 'CTIU':
-                description = 'Cabecera de Tren A en U - Variante especial de cabecera en U';
+                description = 'Cabecera de Tren A en U - Variante especial de cabecera en U - CTIU';
                 break;
             case 'CTIL':
-                description = 'Cabecera de Tren A en L - Variante especial de cabecera en L';
+                description = 'Cabecera de Tren A en L - Variante especial de cabecera en L - CTIL';
                 break;
             default:
                 description = 'Información no disponible';

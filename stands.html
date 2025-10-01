@@ -6,8 +6,11 @@
     <title>Simbología Despiece Stands - Standex</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Tu CSS -->
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Tus CSS -->
     <link rel="stylesheet" href="css/style_stand.css">
+    <link rel="stylesheet" href="css/modal.css">
 <body>
     <div class="container">
         <!-- Header -->
@@ -95,38 +98,63 @@
         </div>
     </div>
 
-    <!-- Modal de Bootstrap -->
+    <!-- Modal mejorado -->
     <div class="modal fade" id="infoModal" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Información del Stand</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">
+                        <i class="fas fa-cubes me-2"></i>
+                        Información del Stand
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <!-- Descripción del stand -->
-                    <p id="modalContent">Información del stand seleccionado</p>
+                    <div class="description-container">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <div id="modalContent"></div>
+                    </div>
                     
-                    <!-- Selector de medidas -->
-                    <div class="mb-3">
-                        <label for="medidaSelect" class="form-label">Selecciona la medida:</label>
-                        <select class="form-select" id="medidaSelect">
-                            <option value="">Seleccione una medida...</option>
-                        </select>
-                    </div>
-
-                    <!-- Input para número de stands -->
-                    <div class="mb-3">
-                        <label for="numStands" class="form-label">Número de stands:</label>
-                        <input type="number" class="form-control" id="numStands" min="1">
-                        <div id="numError" class="text-danger" style="display: none;">
-                            Por favor ingresa solo números positivos
+                    <form id="standForm" class="mt-4">
+                        <!-- Select para medidas -->
+                        <div class="mb-4">
+                            <label for="medidaSelect" class="form-label">
+                                <i class="fas fa-ruler me-2"></i>
+                                Selecciona la medida:
+                            </label>
+                            <select class="form-select" id="medidaSelect" required>
+                                <option value="">Seleccione una medida...</option>
+                            </select>
                         </div>
-                    </div>
+
+                        <!-- Input para número de stands -->
+                        <div class="mb-3">
+                            <label for="numStands" class="form-label">
+                                <i class="fas fa-sort-numeric-up me-2"></i>
+                                Número de stands:
+                            </label>
+                            <input type="number" 
+                                   class="form-control" 
+                                   id="numStands" 
+                                   min="1" 
+                                   required
+                                   placeholder="Ingrese la cantidad">
+                            <div id="numError" class="invalid-feedback">
+                                Por favor ingrese un número válido mayor a 0
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="guardarDatos()">Guardar</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarDatos()">
+                        <i class="fas fa-save me-2"></i>
+                        Guardar
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>
+                        Cerrar
+                    </button>
                 </div>
             </div>
         </div>

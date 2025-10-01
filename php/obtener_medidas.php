@@ -1,41 +1,29 @@
 <?php
-// Mostrar errores (esto nos ayuda a ver si algo falla)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// Decirle al navegador que vamos a enviar JSON
+header('Content-Type: application/json; charset=utf-8');
 
-// Incluir conexión
-require_once '../php/conexion.php';
+// Incluir el archivo de conexion que esta en la misma carpeta
+require_once 'conexion.php';
 
-// Verificar si la conexión fue exitosa
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
-}
+// Hacer la consulta a la base de datos
+$query = "SELECT cve_medidas_estandares, codigo_medida FROM medidas_estandar ORDER BY codigo_medida";
+$resultado = $conexion->query($query);
 
-try {
-    // Consultar las medidas estándares
-    $query = "SELECT * FROM medidas_estandar"; // Asegúrate que este es el nombre correcto de tu tabla
-    $resultado = $conexion->query($query);
+// Crear un array vacio para guardar las medidas
+$medidas = array();
 
-    // Array para guardar las medidas
-    $medidas = array();
-
-    // Si hay resultados
-    if ($resultado) {
-        while($fila = $resultado->fetch_assoc()) {
-            // Guardamos solo los datos que necesitamos
-            $medidas[] = array(
-                'id' => $fila['cve_medidas_estandares'],
-                'descripcion' => $fila['codigo_medida']
-            );
-        }
-        
-        // Configurar el header y devolver JSON
-        header('Content-Type: application/json');
-        echo json_encode($medidas);
-    } else {
-        echo "Error en la consulta: " . $conexion->error;
+// Si la consulta funciono y hay resultados
+if ($resultado && $resultado->num_rows > 0) {
+    // Recorrer cada fila de resultados
+    while($fila = $resultado->fetch_assoc()) {
+        // Agregar cada medida al array
+        $medidas[] = array(
+            'id' => $fila['cve_medidas_estandares'],
+            'descripcion' => $fila['codigo_medida']
+        );
     }
-} catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
 }
+
+// Convertir el array a JSON y enviarlo
+echo json_encode($medidas);
 ?>
