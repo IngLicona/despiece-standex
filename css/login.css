@@ -1,0 +1,60 @@
+        .error {
+            color: red;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid red;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #1e4a72;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2d5aa0;
+        }
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;  
+        }
+        .btn-primary {
+            background-color: #1e4a72;
+            color: white;
+        }   
+        .btn-primary:hover {
+            background-color: #2d5aa0;
+        }
+        .btn-secondary {
+            background-color: white;
+            color: #1e4a72;
+            border: 2px solid #1e4a72;
+        }
+        .btn-secondary:hover {
+            background-color: #1e4a72;
+            color: white;
+        }
+        
+    
