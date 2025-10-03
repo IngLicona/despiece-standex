@@ -1,29 +1,24 @@
-// Funcion para cargar las medidas desde la base de datos
+// Funcion para cargar las medidas directamente en el select
 function cargarMedidas() {
-    // Hacer peticion al servidor para obtener las medidas
-    fetch('/standex-despiece/php/obtener_medidas.php')
-        .then(function(response) {
-            // Convertir la respuesta a JSON
-            return response.json();
-        })
-        .then(function(medidas) {
-            // Buscar el elemento select en el HTML
-            const select = document.getElementById('medidaSelect');
-            
-            // Limpiar el select
-            select.innerHTML = '<option value="">Seleccione una medida...</option>';
-            
-            // Agregar cada medida como una opcion en el select
-            medidas.forEach(function(medida) {
-                const option = document.createElement('option');
-                option.value = medida.id;
-                option.textContent = medida.descripcion;
-                select.appendChild(option);
-            });
-        })
-        .catch(function(error) {
-            console.error('Error al cargar medidas:', error);
-        });
+    // Obtener el select
+    const select = document.getElementById('medidaSelect');
+    
+    // Limpiar el select
+    select.innerHTML = '<option value="">Seleccione una medida...</option>';
+    
+    // Verificar que medidasDisponibles exista
+    if (typeof window.medidasDisponibles === 'undefined') {
+        console.error('medidasDisponibles no esta definido');
+        return;
+    }
+    
+    // Agregar cada medida desde el array local
+    window.medidasDisponibles.forEach(function(medida) {
+        const option = document.createElement('option');
+        option.value = medida.id;
+        option.textContent = medida.descripcion;
+        select.appendChild(option);
+    });
 }
 
 // Funcion para validar que el numero sea mayor a cero
@@ -42,18 +37,47 @@ function validarNumero(input) {
 
 // Funcion para guardar los datos cuando se presiona el boton
 function guardarDatos() {
-    const medida = document.getElementById('medidaSelect').value;
+    const medidaId = document.getElementById('medidaSelect').value;
     const numStands = document.getElementById('numStands').value;
     
     // Verificar que ambos campos tengan valor
-    if (!medida || !numStands) {
+    if (!medidaId || !numStands) {
         alert('Por favor completa todos los campos');
         return;
     }
     
-    // Aqui puedes enviar los datos al servidor
-    console.log('Medida seleccionada:', medida);
-    console.log('Numero de stands:', numStands);
+    // Obtener la descripcion de la medida seleccionada
+    const medidaSeleccionada = window.medidasDisponibles.find(m => m.id === medidaId);
+    const medidaDescripcion = medidaSeleccionada ? medidaSeleccionada.descripcion : 'No especificada';
+    
+    // Obtener el tipo de modulo actual del modal
+    const tipoModulo = document.getElementById('modalContent').getAttribute('data-modulo');
+    
+    // Calcular materiales con la medida seleccionada
+    const resultado = calcularMaterialesPorModulo(tipoModulo, parseInt(numStands), medidaId);
+    
+    // Mostrar resultados
+    if (resultado.error) {
+        alert(resultado.mensaje);
+        return;
+    }
+    
+    // Mostrar los resultados en consola
+    console.log('Calculo de materiales:', resultado);
+    console.log('Medida seleccionada:', medidaDescripcion);
+    
+    // Mostrar alerta con resumen
+    let resumen = 'DESPIECE DE MATERIALES\n\n';
+    resumen += 'Modulo: ' + resultado.modulo + '\n';
+    resumen += 'Cantidad: ' + resultado.cantidad + '\n';
+    resumen += 'Medida: ' + medidaDescripcion + '\n\n';
+    resumen += 'COMPONENTES:\n';
+    
+    resultado.componentes.forEach(function(comp) {
+        resumen += comp.nombre + ': ' + comp.cantidadTotal + '\n';
+    });
+    
+    alert(resumen);
     
     // Cerrar el modal
     const modal = bootstrap.Modal.getInstance(document.getElementById('infoModal'));
@@ -116,7 +140,9 @@ document.querySelectorAll('.cell').forEach(cell => {
         }
         
         // Actualizar el contenido del modal
-        document.getElementById('modalContent').textContent = description;
+        const modalContent = document.getElementById('modalContent');
+        modalContent.textContent = description;
+        modalContent.setAttribute('data-modulo', standType);
         
         // Cargar las medidas cuando se abre el modal
         cargarMedidas();
