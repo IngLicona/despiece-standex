@@ -108,6 +108,9 @@ document.querySelectorAll('.cell').forEach(cell => {
             case 'CTIL':
                 description = 'Cabecera de Tren A en L - Variante especial de cabecera en L - CTIL';
                 break;
+            case 'REGISTRO':
+                description = 'Stand de Registros - REGISTROS';
+                break;
             default:
                 description = 'Información no disponible';
         }
