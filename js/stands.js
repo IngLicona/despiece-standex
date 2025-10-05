@@ -63,26 +63,52 @@ function guardarDatos() {
     }
     
     // Mostrar los resultados en consola
-    console.log('Calculo de materiales:', resultado);
-    console.log('Medida seleccionada:', medidaDescripcion);
-    
-    // Mostrar alerta con resumen
-    let resumen = 'DESPIECE DE MATERIALES\n\n';
-    resumen += 'Modulo: ' + resultado.modulo + '\n';
-    resumen += 'Cantidad: ' + resultado.cantidad + '\n';
-    resumen += 'Medida: ' + medidaDescripcion + '\n\n';
-    resumen += 'COMPONENTES:\n';
+    const modalInfo = bootstrap.Modal.getInstance(document.getElementById('infoModal'));
+    modalInfo.hide();
+    mostrarResultados(resultado, medidaDescripcion);
+}
+
+function mostrarResultados(resultado, medidaDescripcion) {
+    document.getElementById('resultModulo').textContent = resultado.modulo;
+    document.getElementById('resultCantidad').textContent = resultado.cantidad;
+    document.getElementById('resultMedida').textContent = medidaDescripcion;
+
+    const tbodyComponentes = document.getElementById('resultComponentes');
+    tbodyComponentes.innerHTML = ''; 
+
+    resultado.componentes.forEach(function(comp) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${comp.nombre}</td>
+            <td class="text-end">${comp.cantidadTotal}</td>
+        `;
+        tbodyComponentes.appendChild(tr);
+    });
+
+    // Calcular totales con factor de protección
+    const tbodyTotales = document.getElementById('resultTotalesFinales');
+    tbodyTotales.innerHTML = '';
     
     resultado.componentes.forEach(function(comp) {
-        resumen += comp.nombre + ': ' + comp.cantidadTotal + '\n';
+        const totalConProteccion = comp.cantidadTotal + 10;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><strong>${comp.nombre}</strong></td>
+            <td class="text-end"><strong>${totalConProteccion}</strong></td>
+        `;
+        tbodyTotales.appendChild(tr);
     });
     
-    alert(resumen);
-    
-    // Cerrar el modal
-    const modal = bootstrap.Modal.getInstance(document.getElementById('infoModal'));
-    modal.hide();
+    // Mostrar el modal de resultados
+    const modalResultados = new bootstrap.Modal(document.getElementById('resultadosModal'));
+    modalResultados.show();
 }
+
+// Función para imprimir resultados
+function imprimirResultados() {
+    window.print();
+}
+
 
 // Hacer que todas las celdas sean clickeables
 document.querySelectorAll('.cell').forEach(cell => {

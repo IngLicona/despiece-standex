@@ -100,7 +100,7 @@
         </div>
     </div>
 
-    <!-- Modal mejorado -->
+
     <div class="modal fade" id="infoModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -156,6 +156,66 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         <i class="fas fa-times me-2"></i>
                         Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de resultados -->
+    <div class="modal fade" id="resultadosModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-clipboard-list me-2"></i>
+                        DESPIECE DE MATERIALES
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="resultado-info mb-4">
+                        <p class="mb-1"><strong>Modulo:</strong> <span id="resultModulo"></span></p>
+                        <p class="mb-1"><strong>Cantidad:</strong> <span id="resultCantidad"></span></p>
+                        <p class="mb-1"><strong>Medida:</strong> <span id="resultMedida"></span></p>
+                    </div>
+                    
+                    <h6 class="mb-3">COMPONENTES:</h6>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Componente</th>
+                                    <th class="text-end">Cantidad</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultComponentes">
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="totales-finales mt-3 p-3">
+                        <h6>TOTALES FINALES CON PROTECCION:</h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Componente</th>
+                                        <th class="text-end">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="resultTotalesFinales">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>Cerrar
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="imprimirResultados()">
+                        <i class="fas fa-print me-2"></i>Imprimir
                     </button>
                 </div>
             </div>

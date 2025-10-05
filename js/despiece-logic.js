@@ -27,10 +27,16 @@ function obtenerDespiecePorMedida(medidaId) {
 // Nombres de componentes
 const nombresComponentes = {
     'POSTES_2500': 'Postes 2500mm',
+    'POSTES_300_ANTEPECHO': 'Postes 300mm Antepecho',
     'LARGUERO_950': 'Larguero 950mm',
     'LARGUERO_1940_ANTEPECHO': 'Larguero Antepecho 1940mm',
+    'LARGUERO_950_ANTEPECHO': 'Larguero Antepecho 950mm',
     'MAMPARA_964X2390': 'Mampara 964x2390mm',
     'MAMPARA_ANTEPECHO_CURVO_2400X300': 'Panel Antepecho Curvo 2400x300mm',
+    'MAMPARA_ANTEPECHO_964X214': 'Panel Antepecho 964x214mm',
+    'LARGUERO_455_ANTEPECHO': 'Larguero Antepecho 455mm',
+    'MAMPARA_ANTEPECHO_469X214': 'Panel Antepecho 469x214mm',
+    'LARGUERO_ANTEPECHO_2930': 'Larguero Antepecho 2930mm',
     'PANEL_ANTEPECHO_CURVO_2200X300': 'Panel Antepecho Curvo 2200x300mm',
     'PANEL_ANTEPECHO_1954X214': 'Panel Antepecho Recto 1954x214mm'
 };

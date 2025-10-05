@@ -1,0 +1,61 @@
+IMPLEMENTACION DESPIECE 3.00 x 3.00 x 2.50 M
+============================================
+
+Archivo: despiece-3x3x2.5.js
+
+COMPONENTES INCLUIDOS (11 tipos):
+----------------------------------
+1. POSTES_2500 - Postes 2500mm
+2. POSTES_300_ANTEPECHO - Postes 300mm Antepecho
+3. LARGUERO_950 - Larguero 950mm
+4. LARGUERO_1940_ANTEPECHO - Larguero Antepecho 1940mm
+5. LARGUERO_950_ANTEPECHO - Larguero Antepecho 950mm
+6. MAMPARA_964X2390 - Mampara 964x2390mm
+7. MAMPARA_ANTEPECHO_CURVO_2400X300 - Panel Antepecho Curvo 2400x300mm
+8. MAMPARA_ANTEPECHO_964X214 - Panel Antepecho 964x214mm
+9. LARGUERO_455_ANTEPECHO - Larguero Antepecho 455mm
+10. MAMPARA_ANTEPECHO_469X214 - Panel Antepecho 469x214mm
+11. LARGUERO_ANTEPECHO_2930 - Larguero Antepecho 2930mm
+
+MODULOS IMPLEMENTADOS (14 tipos):
+----------------------------------
+CTU - Cabecera de Tren en U
+CTL - Cabecera de Tren en L
+ST - Stands en Tren
+VTL - Vuelta Tren en L
+VTU - Vuelta Tren en U
+VTI - Tren en Vuelta
+FT - Final de Tren
+EI - Esquina de Isla
+II - Intermedio de Isla
+IT - Intermedio de Tren
+VIT - Vuelta Intermedio de Tren
+CTIU - Cabecera de Tren A en U
+CTIL - Cabecera de Tren A en L
+REGISTROS - Stand de Registros
+
+FACTOR DE PROTECCION:
+---------------------
+Se suma +10 unidades a cada componente calculado
+
+FORMULA:
+--------
+Total = (Cantidad Base x Cantidad de Modulos) + 10
+
+EJEMPLO DE USO:
+---------------
+Stand: ST (Stands en Tren)
+Cantidad: 3 modulos
+Medida: 3.00 x 3.00 x 2.50 M
+
+Componente: POSTES_2500
+Cantidad base por modulo: 6
+Calculo: 6 x 3 = 18
+Con proteccion: 18 + 10 = 28
+
+NOTAS IMPORTANTES:
+------------------
+- Algunos modulos tienen cantidades decimales (EI: 4.25, II: 4.5)
+- LARGUERO_ANTEPECHO_2930 varia entre 2, 3, 4 y 5 segun el modulo
+- Los datos fueron extraidos de CALCULO SISTEMA STANDS MOD FINAL.xlsx
+- Todos los calculos son exactos segun la tabla original
