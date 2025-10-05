@@ -94,43 +94,43 @@ document.querySelectorAll('.cell').forEach(cell => {
         let description = '';
         switch(standType) {
             case 'CTU':
-                description = 'Cabecera de Tren en U - Pieza especial que forma la cabecera en forma de U - CTU';
+                description = 'Cabecera de Tren en U - CTU';
                 break;
             case 'CTL':
-                description = 'Cabecera de Tren en L - Pieza especial que forma la cabecera en forma de L - CTL';
+                description = 'Cabecera de Tren en L - CTL';
                 break;
             case 'ST':
-                description = 'Stands en Tren - Pieza estándar que forma parte del tren de stands - ST';
+                description = 'Stands en Tren - ST';
                 break;
             case 'VTL':
-                description = 'Vuelta Tren en L - Pieza especial para hacer giros en L - VTL';
+                description = 'Vuelta Tren en L - VTL';
                 break;
             case 'VTU':
-                description = 'Vuelta Tren en U - Pieza especial para hacer giros en U - VTU';
+                description = 'Vuelta Tren en U - VTU';
                 break;
             case 'VTI':
-                description = 'Tren en Vuelta - Pieza de transición para giros - VTI';
+                description = 'Tren en Vuelta - VTI';
                 break;
             case 'FT':
-                description = 'Final de Tren - Pieza que marca el final de un tren de stands - FT';
+                description = 'Final de Tren - FT';
                 break;
             case 'EI':
-                description = 'Esquina de Isla - Pieza especial para las esquinas de islas - EI';
+                description = 'Esquina de Isla - EI';
                 break;
             case 'II':
-                description = 'Intermedio de Isla - Pieza estándar para las islas - II';
+                description = 'Intermedio de Isla - II';
                 break;
             case 'IT':
-                description = 'Intermedio de Tren - Pieza de conexión entre stands - IT';
+                description = 'Intermedio de Tren - IT';
                 break;
             case 'VIT':
-                description = 'Vuelta Intermedio de Tren - Pieza de transición para giros intermedios - VIT';
+                description = 'Vuelta Intermedio de Tren - VIT';
                 break;
             case 'CTIU':
-                description = 'Cabecera de Tren A en U - Variante especial de cabecera en U - CTIU';
+                description = 'Cabecera de Tren A en U - CTIU';
                 break;
             case 'CTIL':
-                description = 'Cabecera de Tren A en L - Variante especial de cabecera en L - CTIL';
+                description = 'Cabecera de Tren A en L - CTIL';
                 break;
             case 'REGISTRO':
                 description = 'Stand de Registros - REGISTROS';

@@ -7,7 +7,7 @@ $usuario = $_POST['username'];
 $password = $_POST['password'];
 
 // 3. Buscamos el usuario en la base de datos
-$consulta = "SELECT * FROM usuario WHERE username = '$usuario'";
+$consulta = "SELECT * FROM usuarios WHERE username = '$usuario'";
 $resultado = $conexion->query($consulta);
 
 // 4. Si encontramos el usuario
