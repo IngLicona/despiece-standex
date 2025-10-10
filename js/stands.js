@@ -73,35 +73,117 @@ function mostrarResultados(resultado, medidaDescripcion) {
     document.getElementById('resultCantidad').textContent = resultado.cantidad;
     document.getElementById('resultMedida').textContent = medidaDescripcion;
 
-    const tbodyComponentes = document.getElementById('resultComponentes');
-    tbodyComponentes.innerHTML = ''; 
+    const contenedor = document.getElementById('contenedorResultados');
+    contenedor.innerHTML = '';
+    
+    // Verificar si existe funcion especifica para esta medida
+    const medidaId = document.getElementById('medidaSelect').value;
+    
+    if (medidaId === '4' && typeof mostrarResultados3x3x2_5 === 'function') {
+        // Usar funcion especifica para 3x3x2.5
+        mostrarResultados3x3x2_5(contenedor, resultado);
+    } else {
+        // Mostrar tabla simple generica para otras medidas
+        mostrarTablaGenerica(contenedor, resultado);
+    }
+    
+    const modalResultados = new bootstrap.Modal(document.getElementById('resultadosModal'));
+    modalResultados.show();
+}
 
+function mostrarTablaGenerica(contenedor, resultado) {
+    const seccion = document.createElement('div');
+    seccion.className = 'seccion-resultado mb-4';
+    
+    const tituloDiv = document.createElement('h6');
+    tituloDiv.className = 'titulo-seccion mb-3';
+    tituloDiv.textContent = 'MATERIALES TOTALES';
+    seccion.appendChild(tituloDiv);
+    
+    const tabla = document.createElement('table');
+    tabla.className = 'table table-sm table-bordered';
+    
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>Componente</th>
+            <th class="text-end">Cantidad</th>
+        </tr>
+    `;
+    tabla.appendChild(thead);
+    
+    const tbody = document.createElement('tbody');
     resultado.componentes.forEach(function(comp) {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${comp.nombre}</td>
-            <td class="text-end">${comp.cantidadTotal}</td>
+            <td class="text-end"><strong>${comp.cantidadTotal}</strong></td>
         `;
-        tbodyComponentes.appendChild(tr);
+        tbody.appendChild(tr);
     });
-
-    // Calcular totales con factor de protección
-    const tbodyTotales = document.getElementById('resultTotalesFinales');
-    tbodyTotales.innerHTML = '';
     
+    tabla.appendChild(tbody);
+    seccion.appendChild(tabla);
+    contenedor.appendChild(seccion);
+    
+    // Agregar seccion de factor de proteccion
+    const seccionFactor = document.createElement('div');
+    seccionFactor.className = 'seccion-resultado mb-4';
+    
+    const tituloFactor = document.createElement('h6');
+    tituloFactor.className = 'titulo-seccion mb-3';
+    tituloFactor.textContent = 'FACTOR DE PROTECCION (+10)';
+    seccionFactor.appendChild(tituloFactor);
+    
+    const tablaFactor = document.createElement('table');
+    tablaFactor.className = 'table table-sm table-bordered';
+    
+    const tbodyFactor = document.createElement('tbody');
     resultado.componentes.forEach(function(comp) {
-        const totalConProteccion = comp.cantidadTotal + 10;
+        const totalConFactor = comp.cantidadTotal + 10;
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><strong>${comp.nombre}</strong></td>
-            <td class="text-end"><strong>${totalConProteccion}</strong></td>
+            <td>${comp.nombre}</td>
+            <td class="text-end"><strong>${totalConFactor}</strong></td>
         `;
-        tbodyTotales.appendChild(tr);
+        tbodyFactor.appendChild(tr);
     });
     
-    // Mostrar el modal de resultados
-    const modalResultados = new bootstrap.Modal(document.getElementById('resultadosModal'));
-    modalResultados.show();
+    tablaFactor.appendChild(tbodyFactor);
+    seccionFactor.appendChild(tablaFactor);
+    contenedor.appendChild(seccionFactor);
+}
+
+function obtenerCantidad(componentes, codigoComponente) {
+    const comp = componentes.find(c => c.codigo === codigoComponente);
+    return comp ? comp.cantidadTotal : 0;
+}
+
+function agregarSeccion(contenedor, titulo, items) {
+    const seccion = document.createElement('div');
+    seccion.className = 'seccion-resultado mb-4';
+    
+    const tituloDiv = document.createElement('h6');
+    tituloDiv.className = 'titulo-seccion mb-3';
+    tituloDiv.textContent = titulo;
+    seccion.appendChild(tituloDiv);
+    
+    const tabla = document.createElement('table');
+    tabla.className = 'table table-sm table-bordered';
+    
+    const tbody = document.createElement('tbody');
+    items.forEach(function(item) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${item.nombre}</td>
+            <td class="text-end"><strong>${item.cantidad}</strong></td>
+        `;
+        tbody.appendChild(tr);
+    });
+    
+    tabla.appendChild(tbody);
+    seccion.appendChild(tabla);
+    contenedor.appendChild(seccion);
 }
 
 // Función para imprimir resultados

@@ -11,6 +11,8 @@
     <!-- Tus CSS -->
     <link rel="stylesheet" href="css/style_stand.css">
     <link rel="stylesheet" href="css/modal.css">
+</head>
+    
 <body>
     <div class="container">
         <!-- Header -->
@@ -100,7 +102,7 @@
         </div>
     </div>
 
-
+    <!-- Modales -->
     <div class="modal fade" id="infoModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -112,14 +114,12 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Descripción del stand -->
                     <div class="description-container">
                         <i class="fas fa-info-circle me-2"></i>
                         <div id="modalContent"></div>
                     </div>
                     
                     <form id="standForm" class="mt-4">
-                        <!-- Select para medidas -->
                         <div class="mb-4">
                             <label for="medidaSelect" class="form-label">
                                 <i class="fas fa-ruler me-2"></i>
@@ -130,7 +130,6 @@
                             </select>
                         </div>
 
-                        <!-- Input para número de stands -->
                         <div class="mb-3">
                             <label for="numStands" class="form-label">
                                 <i class="fas fa-sort-numeric-up me-2"></i>
@@ -162,7 +161,6 @@
         </div>
     </div>
 
-    <!-- Modal de resultados -->
     <div class="modal fade" id="resultadosModal" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -173,42 +171,14 @@
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
                     <div class="resultado-info mb-4">
                         <p class="mb-1"><strong>Modulo:</strong> <span id="resultModulo"></span></p>
                         <p class="mb-1"><strong>Cantidad:</strong> <span id="resultCantidad"></span></p>
                         <p class="mb-1"><strong>Medida:</strong> <span id="resultMedida"></span></p>
                     </div>
                     
-                    <h6 class="mb-3">COMPONENTES:</h6>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Componente</th>
-                                    <th class="text-end">Cantidad</th>
-                                </tr>
-                            </thead>
-                            <tbody id="resultComponentes">
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div class="totales-finales mt-3 p-3">
-                        <h6>TOTALES FINALES CON PROTECCION:</h6>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Componente</th>
-                                        <th class="text-end">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="resultTotalesFinales">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <div id="contenedorResultados"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
