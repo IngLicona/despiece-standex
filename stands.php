@@ -16,6 +16,7 @@ require_once 'php/verificar_sesion.php';
     <!-- Tus CSS -->
     <link rel="stylesheet" href="css/style_stand.css">
     <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/print.css">
 </head>
     
 <body>
