@@ -29,6 +29,44 @@
             align-items: center;
         }
 
+        .title-section {
+            background: white;
+            color: #1e4a72;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .logout-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-name {
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .btn-logout {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background-color: #d32f2f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
         .logo-section {
             display: flex;
             align-items: center;

@@ -76,14 +76,16 @@ function mostrarResultados(resultado, medidaDescripcion) {
     const contenedor = document.getElementById('contenedorResultados');
     contenedor.innerHTML = '';
     
-    // Verificar si existe funcion especifica para esta medida
     const medidaId = document.getElementById('medidaSelect').value;
     
-    if (medidaId === '4' && typeof mostrarResultados3x3x2_5 === 'function') {
-        // Usar funcion especifica para 3x3x2.5
+    // Seleccionar la funcion de visualizacion segun la medida
+    if (medidaId === '2' && typeof mostrarResultados3x2x2_5 === 'function') {
+        mostrarResultados3x2x2_5(contenedor, resultado);
+    } else if (medidaId === '3' && typeof mostrarResultados3x2_5x2_5 === 'function') {
+        mostrarResultados3x2_5x2_5(contenedor, resultado);
+    } else if (medidaId === '4' && typeof mostrarResultados3x3x2_5 === 'function') {
         mostrarResultados3x3x2_5(contenedor, resultado);
     } else {
-        // Mostrar tabla simple generica para otras medidas
         mostrarTablaGenerica(contenedor, resultado);
     }
     

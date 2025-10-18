@@ -1,3 +1,8 @@
+<?php
+require_once 'php/verificar_sesion.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,9 +22,19 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            
             <div class="title-section">
                 SIMBOLOGÍA DESPIECE STANDS
+            </div>
+            
+            <div class="logout-section">
+                <span class="user-name">
+                    <i class="fas fa-user me-2"></i>
+                    <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?>
+                </span>
+                <button class="btn btn-logout" onclick="cerrarSesion()">
+                    <i class="fas fa-sign-out-alt me-2"></i>
+                    Cerrar Sesión
+                </button>
             </div>
         </div>
 
@@ -192,6 +207,34 @@
         </div>
     </div>
 
+    <!-- Modal de Cerrar Sesion -->
+    <div class="modal fade" id="logoutModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-sign-out-alt me-2"></i>
+                        Cerrar Sesion
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">¿Estas seguro de que deseas cerrar sesion?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="confirmarCerrarSesion()">
+                        <i class="fas fa-sign-out-alt me-2"></i>
+                        Cerrar Sesion
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -200,10 +243,27 @@
     <script src="js/despiece-3x2x2.5.js"></script>
     <script src="js/despiece-3x2.5x2.5.js"></script>
     <script src="js/despiece-3x3x2.5.js"></script>
+    <script>
+    let logoutModal;
+
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Crear instancia del modal de logout
+        logoutModal = new bootstrap.Modal(document.getElementById('logoutModal'));
+    });
+
+    function cerrarSesion() {
+        logoutModal.show();
+    }
+
+    // Funcion para confirmar y ejecutar el cierre de sesion
+    function confirmarCerrarSesion() {
+        window.location.href = 'php/logout.php';
+    }
+    </script>
     
     <!-- Logica principal -->
     <script src="js/despiece-logic.js"></script>
-    
     <!-- Scripts de interfaz -->
     <script src="js/stands.js"></script>
 </body>
