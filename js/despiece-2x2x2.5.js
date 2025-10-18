@@ -142,3 +142,51 @@ const despiece_2x2x2_5 = {
         }
     }
 };
+
+// Funcion para mostrar los resultados en el modal de medida 2x2x2.5
+function mostrarResultados2x2x2_5(contenedor, resultado){
+    // Obtener la referencia a los componentes del resultado
+    const componentes = resultado.componentes;
+
+    // Funcion auxiliar para obtener la cantidad de un componente
+    function getCantidad(codigo){
+        const comp = componentes.find(c => c.codigo === codigo);
+        return comp ? comp.cantidadTotal : 0;
+    }
+
+    // Seccion 1: TOTALES STAND TIPO 1 (ANTEPECHO CURVO)
+    agregarSeccion(contenedor, 'TOTALES STAND TIPO 1 (ANTEPECHO CURVO)', [
+        { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
+        { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
+        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
+        { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
+        { nombre: 'TOTAL PANEL ANTEPECHO CURVO 2400x300mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2400X300') }
+    ]);
+
+    // Seccion 2: Factor de proteccion Stand Tipo 1
+    agregarSeccion(contenedor, 'FACTOR DE PROTECCION STAND TIPO 1', [
+        { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') + 10 },
+        { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') + 10 },
+        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') + 10 },
+        { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') + 10 },
+        { nombre: 'TOTAL PANEL ANTEPECHO CURVO 2400x300mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2400X300') + 10 }
+    ]);
+
+    // Seccion 3: TOTALES STAND TIPO 2 (ANTEPECHO RECTO)
+    agregarSeccion(contenedor, 'TOTALES STAND TIPO 2 (ANTEPECHO RECTO)', [
+        { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
+        { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
+        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
+        { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
+        { nombre: 'TOTAL PANEL ANTEPECHO 1954x214mm', cantidad: getCantidad('PANEL_ANTEPECHO_1954X214') }
+    ]);
+
+    // Seccion 4: Factor de proteccion Stand Tipo 2
+    agregarSeccion(contenedor, 'FACTOR DE PROTECCION STAND TIPO 2', [
+        { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') + 10 },
+        { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') + 10 },
+        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') + 10 },
+        { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') + 10 },
+        { nombre: 'TOTAL PANEL ANTEPECHO 1954x214mm', cantidad: getCantidad('PANEL_ANTEPECHO_1954X214') + 10 }
+    ]);
+}

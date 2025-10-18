@@ -79,7 +79,9 @@ function mostrarResultados(resultado, medidaDescripcion) {
     const medidaId = document.getElementById('medidaSelect').value;
     
     // Seleccionar la funcion de visualizacion segun la medida
-    if (medidaId === '2' && typeof mostrarResultados3x2x2_5 === 'function') {
+    if (medidaId === '1' && typeof mostrarResultados2x2x2_5 === 'function') {
+        mostrarResultados2x2x2_5(contenedor, resultado);
+    } else if (medidaId === '2' && typeof mostrarResultados3x2x2_5 === 'function') {
         mostrarResultados3x2x2_5(contenedor, resultado);
     } else if (medidaId === '3' && typeof mostrarResultados3x2_5x2_5 === 'function') {
         mostrarResultados3x2_5x2_5(contenedor, resultado);
