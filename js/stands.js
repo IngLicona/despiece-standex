@@ -196,13 +196,85 @@ function imprimirResultados() {
 }
 
 
+// Funcion para guardar datos de registro
+function guardarDatosRegistro() {
+    const tipoRegistro = document.getElementById('tipoRegistroSelect').value;
+    const numRegistros = document.getElementById('numRegistros').value;
+    
+    if (!tipoRegistro || !numRegistros) {
+        alert('Por favor completa todos los campos');
+        return;
+    }
+    
+    // Calcular materiales para el registro
+    const resultado = calcularMaterialesRegistro(tipoRegistro, parseInt(numRegistros));
+    
+    if (resultado.error) {
+        alert(resultado.mensaje);
+        return;
+    }
+    
+    // Cerrar modal de registro
+    const modalRegistro = bootstrap.Modal.getInstance(document.getElementById('registroModal'));
+    modalRegistro.hide();
+    
+    // Mostrar resultados
+    document.getElementById('resultModulo').textContent = resultado.modulo;
+    document.getElementById('resultCantidad').textContent = resultado.cantidad;
+    document.getElementById('resultMedida').textContent = '1.00 x 0.50 x 2.50 M';
+    
+    const contenedor = document.getElementById('contenedorResultados');
+    contenedor.innerHTML = '';
+    
+    mostrarResultadosRegistro(contenedor, resultado);
+    
+    const modalResultados = new bootstrap.Modal(document.getElementById('resultadosModal'));
+    modalResultados.show();
+}
+
+// Funcion para calcular materiales de registro
+function calcularMaterialesRegistro(tipoRegistro, cantidad) {
+    if (!registro[tipoRegistro]) {
+        return { error: true, mensaje: 'Tipo de registro no encontrado' };
+    }
+    
+    const registroData = registro[tipoRegistro];
+    const resultado = {
+        modulo: registroData.nombre,
+        cantidad: cantidad,
+        componentes: []
+    };
+    
+    for (let componenteKey in registroData.componentes) {
+        const cantidadBase = registroData.componentes[componenteKey];
+        const cantidadTotal = cantidadBase * cantidad;
+        
+        resultado.componentes.push({
+            codigo: componenteKey,
+            cantidadTotal: cantidadTotal
+        });
+    }
+    
+    return resultado;
+}
+
 // Hacer que todas las celdas sean clickeables
 document.querySelectorAll('.cell').forEach(cell => {
     cell.addEventListener('click', function() {
-        // Obtener el texto de la celda
         const standType = this.textContent;
         
-        // Obtener la descripción según el tipo de stand
+        // Si es REGISTRO, mostrar modal diferente
+        if (standType === 'REGISTRO') {
+            document.getElementById('tipoRegistroSelect').value = '';
+            document.getElementById('numRegistros').value = '';
+            document.getElementById('numRegistroError').style.display = 'none';
+            
+            const modal = new bootstrap.Modal(document.getElementById('registroModal'));
+            modal.show();
+            return;
+        }
+        
+        // Para otros stands, mostrar modal normal
         let description = '';
         switch(standType) {
             case 'CTU':
@@ -244,26 +316,19 @@ document.querySelectorAll('.cell').forEach(cell => {
             case 'CTIL':
                 description = 'Cabecera de Tren A en L - CTIL';
                 break;
-            case 'REGISTRO':
-                description = 'Stand de Registros - REGISTROS';
-                break;
             default:
                 description = 'Información no disponible';
         }
         
-        // Actualizar el contenido del modal
         const modalContent = document.getElementById('modalContent');
         modalContent.textContent = description;
         modalContent.setAttribute('data-modulo', standType);
         
-        // Cargar las medidas cuando se abre el modal
         cargarMedidas();
         
-        // Limpiar el input de número
         document.getElementById('numStands').value = '';
         document.getElementById('numError').style.display = 'none';
         
-        // Mostrar el modal
         const modal = new bootstrap.Modal(document.getElementById('infoModal'));
         modal.show();
     });
@@ -272,4 +337,17 @@ document.querySelectorAll('.cell').forEach(cell => {
 // Agregar el evento para validar el número de stands
 document.getElementById('numStands').addEventListener('input', function() {
     validarNumero(this);
+});
+
+// Agregar el evento para validar el número de registros
+document.getElementById('numRegistros').addEventListener('input', function() {
+    const valor = this.value;
+    const mensajeError = document.getElementById('numRegistroError');
+    
+    if (valor <= 0 || isNaN(valor)) {
+        mensajeError.style.display = 'block';
+        this.value = '';
+    } else {
+        mensajeError.style.display = 'none';
+    }
 });

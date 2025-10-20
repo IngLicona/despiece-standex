@@ -236,6 +236,73 @@ require_once 'php/verificar_sesion.php';
         </div>
     </div>
 
+    <!-- Modal de Registros -->
+    <div class="modal fade" id="registroModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-cubes me-2"></i>
+                        Stand de Registros
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="description-container">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <div>
+                            <p class="mb-2">Medida: <strong>1.00 x 0.50 x 2.50 M</strong></p>
+                            <p class="mb-0">Seleccione el tipo de registro</p>
+                        </div>
+                    </div>
+                    
+                    <form id="registroForm" class="mt-4">
+                        <div class="mb-4">
+                            <label for="tipoRegistroSelect" class="form-label">
+                                <i class="fas fa-list me-2"></i>
+                                Tipo de Registro:
+                            </label>
+                            <select class="form-select" id="tipoRegistroSelect" required>
+                                <option value="">Seleccione un tipo...</option>
+                                <option value="CR">Cabecera de Registro</option>
+                                <option value="RT">Registro en Tren</option>
+                                <option value="VT">Vuelta De Tren</option>
+                                <option value="CRC">Cabecera Registro Curvo</option>
+                                <option value="RTC">Registro en Tren Curvo</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="numRegistros" class="form-label">
+                                <i class="fas fa-sort-numeric-up me-2"></i>
+                                Numero de registros:
+                            </label>
+                            <input type="number" 
+                                    class="form-control" 
+                                    id="numRegistros" 
+                                    min="1" 
+                                    required
+                                    placeholder="Ingrese la cantidad">
+                            <div id="numRegistroError" class="invalid-feedback">
+                                Por favor ingrese un numero valido mayor a 0
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="guardarDatosRegistro()">
+                        <i class="fas fa-save me-2"></i>
+                        Guardar
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -244,6 +311,10 @@ require_once 'php/verificar_sesion.php';
     <script src="js/despiece-3x2x2.5.js"></script>
     <script src="js/despiece-3x2.5x2.5.js"></script>
     <script src="js/despiece-3x3x2.5.js"></script>
+    
+    <!-- Despiece de registros -->
+    <script src="js/registro.js"></script>
+    
     <script>
     let logoutModal;
 
