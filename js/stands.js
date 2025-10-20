@@ -190,9 +190,257 @@ function agregarSeccion(contenedor, titulo, items) {
     contenedor.appendChild(seccion);
 }
 
-// Función para imprimir resultados
+// Funcion para imprimir resultados
 function imprimirResultados() {
-    window.print();
+    // Obtener el contenido del modal
+    const contenidoModal = document.querySelector('#resultadosModal .modal-body').cloneNode(true);
+    const modulo = document.getElementById('resultModulo').textContent;
+    const cantidad = document.getElementById('resultCantidad').textContent;
+    const medida = document.getElementById('resultMedida').textContent;
+    
+    // Crear ventana de impresion
+    const ventanaImpresion = window.open('', '_blank', 'width=900,height=700');
+    
+    // Escribir el HTML completo
+    ventanaImpresion.document.write(`
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Despiece de Materiales - Standex</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="css/print.css">
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 20px;
+                    position: relative;
+                }
+                
+                .print-header {
+                    text-align: center;
+                    margin-bottom: 30px;
+                    padding: 20px;
+                    border-bottom: 3px solid #333;
+                    position: relative;
+                }
+                
+                .print-header img {
+                    width: 100%;
+                    max-width: 100%;
+                    height: auto;
+                    margin-bottom: 15px;
+                }
+                
+                .print-header h1 {
+                    margin: 10px 0;
+                    color: #333;
+                    font-size: 24px;
+                    font-weight: bold;
+                }
+                
+                .print-header p {
+                    margin: 5px 0;
+                    color: #666;
+                    font-size: 14px;
+                }
+                
+                .resultado-info {
+                    background: #f8f9fa;
+                    border: 2px solid #333;
+                    padding: 15px;
+                    margin-bottom: 25px;
+                    border-radius: 5px;
+                }
+                
+                .resultado-info p {
+                    margin: 8px 0;
+                    font-size: 14px;
+                }
+                
+                .resultado-info strong {
+                    color: #333;
+                    font-weight: bold;
+                }
+                
+                .seccion-resultado {
+                    margin-bottom: 25px;
+                    page-break-inside: avoid;
+                }
+                
+                .titulo-seccion {
+                    background: #333;
+                    color: white;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    font-weight: bold;
+                    font-size: 14px;
+                }
+                
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-bottom: 20px;
+                }
+                
+                table thead {
+                    background: #555;
+                    color: white;
+                }
+                
+                table th,
+                table td {
+                    border: 1px solid #333;
+                    padding: 8px;
+                    text-align: left;
+                }
+                
+                table td:last-child {
+                    text-align: right;
+                    font-weight: bold;
+                }
+                
+                .print-footer {
+                    margin-top: 40px;
+                    text-align: center;
+                    padding-top: 20px;
+                    border-top: 3px solid #333;
+                    position: relative;
+                }
+                
+                .print-footer img {
+                    width: 100%;
+                    max-width: 100%;
+                    height: auto;
+                    margin-bottom: 10px;
+                }
+                
+                .print-footer p {
+                    margin: 5px 0;
+                    font-size: 12px;
+                    color: #666;
+                }
+                
+                @media print {
+                    @page {
+                        size: A4;
+                        margin: 2cm 1.5cm;
+                    }
+                    
+                    body {
+                        padding: 0;
+                        margin: 0;
+                    }
+                    
+                    .print-header {
+                        position: running(header);
+                        margin-bottom: 20px;
+                    }
+                    
+                    .print-footer {
+                        position: running(footer);
+                        margin-top: 20px;
+                    }
+                    
+                    .print-header img,
+                    .print-footer img {
+                        width: 100%;
+                        max-width: 100%;
+                    }
+                    
+                    .watermark-header {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        width: 100%;
+                        z-index: -1;
+                    }
+                    
+                    .watermark-header img {
+                        width: 100%;
+                        height: auto;
+                        opacity: 0.95;
+                    }
+                    
+                    .watermark-footer {
+                        position: fixed;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        width: 100%;
+                        z-index: -1;
+                    }
+                    
+                    .watermark-footer img {
+                        width: 100%;
+                        height: auto;
+                        opacity: 0.95;
+                    }
+                    
+                    .content-wrapper {
+                        position: relative;
+                        z-index: 1;
+                        padding-top: 120px;
+                        padding-bottom: 100px;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            <!-- Marcas de agua fijas en todas las paginas -->
+            <div class="watermark-header">
+                <img src="assets/img/up.png" alt="Standex Header">
+            </div>
+            
+            <div class="watermark-footer">
+                <img src="assets/img/down.png" alt="Standex Footer">
+            </div>
+            
+            <!-- Contenido principal -->
+            <div class="content-wrapper">
+                <!-- Encabezado con informacion -->
+                <div class="print-header" style="border: none; padding-top: 0;">
+                    <h1>DESPIECE DE MATERIALES PARA STANDS</h1>
+                    <p><strong>Fecha:</strong> ${new Date().toLocaleDateString('es-MX', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric',
+                        weekday: 'long'
+                    })}</p>
+                    <p><strong>Hora:</strong> ${new Date().toLocaleTimeString('es-MX')}</p>
+                </div>
+                
+                <!-- Informacion del pedido -->
+                <div class="resultado-info">
+                    <p><strong>Modulo:</strong> ${modulo}</p>
+                    <p><strong>Cantidad:</strong> ${cantidad} unidades</p>
+                    <p><strong>Medida:</strong> ${medida}</p>
+                </div>
+                
+                <!-- Contenido del despiece -->
+                ${contenidoModal.innerHTML}
+                
+                <!-- Pie de pagina con informacion -->
+                <div class="print-footer" style="border: none; margin-top: 30px;">
+                    <p><strong>STANDEX - Todos los derechos reservados © ${new Date().getFullYear()}</strong></p>
+                    <p>Documento generado automaticamente por el sistema de despiece</p>
+                    <p>Este documento es valido como cotizacion de materiales</p>
+                </div>
+            </div>
+        </body>
+        </html>
+    `);
+    
+    ventanaImpresion.document.close();
+    
+    // Esperar a que carguen las imagenes antes de imprimir
+    ventanaImpresion.onload = function() {
+        setTimeout(function() {
+            ventanaImpresion.print();
+        }, 500);
+    };
 }
 
 
