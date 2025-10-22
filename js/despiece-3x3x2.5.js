@@ -251,14 +251,14 @@ function mostrarResultados3x3x2_5(contenedor, resultado) {
 
     // Seccion 2: Stand Tipo 1 Factor de Proteccion
     agregarSeccion(contenedor, 'FACTOR DE PROTECCION STAND TIPO 1', [
-        { nombre: 'TOTAL POSTES 2500', cantidad: 10 },
-        { nombre: 'TOTAL POSTES 300', cantidad: 10 },
-        { nombre: 'TOTAL LARGUERO 950', cantidad: 10 },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 950', cantidad: 10 },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940', cantidad: 10 },
-        { nombre: 'TOTAL MAMPARA 964 X 2390', cantidad: 10 },
-        { nombre: 'TOTAL PANEL ANTEPECHO CURVO 2200 X 300', cantidad: 10 },
-        { nombre: 'TOTAL PANEL ANTEPECHO 964 X 214', cantidad: 10 }
+        { nombre: 'TOTAL POSTES 2500', cantidad: getCantidad('POSTES_2500') + 10},
+        { nombre: 'TOTAL POSTES 300', cantidad: getCantidad('POSTES_300_ANTEPECHO') + 10},
+        { nombre: 'TOTAL LARGUERO 950', cantidad: getCantidad('LARGUERO_950') +10},
+        { nombre: 'TOTAL LARGUERO ANTEPECHO 950', cantidad: getCantidad('LARGUERO_950_ANTEPECHO') +10},
+        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') +10},
+        { nombre: 'TOTAL MAMPARA 964 X 2390', cantidad: getCantidad('MAMPARA_964X2390') +10},
+        { nombre: 'TOTAL PANEL ANTEPECHO CURVO 2200 X 300', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2400X300') +10},
+        { nombre: 'TOTAL PANEL ANTEPECHO 964 X 214', cantidad: getCantidad('MAMPARA_ANTEPECHO_964X214') +10}
     ]);
 
     // Seccion 3: Stand Tipo 2 Totales
@@ -275,14 +275,14 @@ function mostrarResultados3x3x2_5(contenedor, resultado) {
 
     // Seccion 4: Stand Tipo 2 Factor de Proteccion
     agregarSeccion(contenedor, 'FACTOR DE PROTECCION STAND TIPO 2', [
-        { nombre: 'TOTAL POSTES 2500', cantidad: 10 },
-        { nombre: 'TOTAL POSTES 300', cantidad: 10 },
-        { nombre: 'TOTAL LARGUERO 950', cantidad: 10 },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 455', cantidad: 10 },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940', cantidad: 10 },
-        { nombre: 'TOTAL MAMPARA 964 X 2390', cantidad: 10 },
-        { nombre: 'TOTAL PANEL ANTEPECHO CURVO 2200 X 300', cantidad: 10 },
-        { nombre: 'TOTAL PANEL ANTEPECHO 469 X 214', cantidad: 10 }
+        { nombre: 'TOTAL POSTES 2500', cantidad: getCantidad('POSTES_2500') + 10},
+        { nombre: 'TOTAL POSTES 300', cantidad: getCantidad('POSTES_300_ANTEPECHO') * 2  + 10},
+        { nombre: 'TOTAL LARGUERO 950', cantidad: getCantidad('LARGUERO_950') +10},
+        { nombre: 'TOTAL LARGUERO ANTEPECHO 455', cantidad: getCantidad('LARGUERO_455_ANTEPECHO') +10},
+        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') +10},
+        { nombre: 'TOTAL MAMPARA 964 X 2390', cantidad: getCantidad('MAMPARA_964X2390') +10},
+        { nombre: 'TOTAL PANEL ANTEPECHO CURVO 2200 X 300', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2400X300') +10},
+        { nombre: 'TOTAL PANEL ANTEPECHO 469 X 214', cantidad: getCantidad('MAMPARA_ANTEPECHO_469X214') +10}
     ]);
 
     // Seccion 5: Stand Tipo 3 Totales
@@ -296,11 +296,11 @@ function mostrarResultados3x3x2_5(contenedor, resultado) {
 
     // Seccion 6: Stand Tipo 3 Factor de Proteccion
     agregarSeccion(contenedor, 'FACTOR DE PROTECCION STAND TIPO 3', [
-        { nombre: 'TOTAL POSTES 2500', cantidad: 10 },
-        { nombre: 'TOTAL LARGUERO 950', cantidad: 10 },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 2930', cantidad: 10 },
-        { nombre: 'TOTAL MAMPARA 964 X 2390', cantidad: 10 },
-        { nombre: 'TOTAL PANEL ANTEPECHO 2944 X 214', cantidad: 10 }
+        { nombre: 'TOTAL POSTES 2500', cantidad: getCantidad('POSTES_2500') + 10 },
+        { nombre: 'TOTAL LARGUERO 950', cantidad: getCantidad('LARGUERO_950') + 10 },
+        { nombre: 'TOTAL LARGUERO ANTEPECHO 2930', cantidad: getCantidad('LARGUERO_ANTEPECHO_2930') + 10 },
+        { nombre: 'TOTAL MAMPARA 964 X 2390', cantidad: getCantidad('MAMPARA_964X2390') + 10 },
+        { nombre: 'TOTAL PANEL ANTEPECHO 2944 X 214', cantidad: getCantidad('MAMPARA_ANTEPECHO_964X214') + 10 }
     ]);
 
     // Seccion 7: Stand Tipo 4 Totales
@@ -313,9 +313,9 @@ function mostrarResultados3x3x2_5(contenedor, resultado) {
 
     // Seccion 8: Stand Tipo 4 Factor de Proteccion
     agregarSeccion(contenedor, 'FACTOR DE PROTECCION STAND TIPO 4', [
-        { nombre: 'TOTAL POSTES 2500', cantidad: 10 },
-        { nombre: 'TOTAL LARGUERO 950', cantidad: 10 },
-        { nombre: 'TOTAL MAMPARA 964 X 2390', cantidad: 10 },
-        { nombre: 'TOTAL PANEL CON GANCHOS ANTEPECHO 2930 X 300', cantidad: 10 }
+        { nombre: 'TOTAL POSTES 2500', cantidad: getCantidad('POSTES_2500') + 10},
+        { nombre: 'TOTAL LARGUERO 950', cantidad: getCantidad('LARGUERO_950') + 10},
+        { nombre: 'TOTAL MAMPARA 964 X 2390', cantidad: getCantidad('MAMPARA_964X2390') + 10},
+        { nombre: 'TOTAL PANEL CON GANCHOS ANTEPECHO 2930 X 300', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2400X300') + 10}
     ]);
 }

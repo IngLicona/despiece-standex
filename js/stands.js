@@ -65,10 +65,10 @@ function guardarDatos() {
     // Mostrar los resultados en consola
     const modalInfo = bootstrap.Modal.getInstance(document.getElementById('infoModal'));
     modalInfo.hide();
-    mostrarResultados(resultado, medidaDescripcion);
+    mostrarResultados(resultado, medidaDescripcion, tipoModulo);
 }
 
-function mostrarResultados(resultado, medidaDescripcion) {
+function mostrarResultados(resultado, medidaDescripcion, tipoModulo) {
     document.getElementById('resultModulo').textContent = resultado.modulo;
     document.getElementById('resultCantidad').textContent = resultado.cantidad;
     document.getElementById('resultMedida').textContent = medidaDescripcion;
@@ -84,7 +84,7 @@ function mostrarResultados(resultado, medidaDescripcion) {
     } else if (medidaId === '2' && typeof mostrarResultados3x2x2_5 === 'function') {
         mostrarResultados3x2x2_5(contenedor, resultado);
     } else if (medidaId === '3' && typeof mostrarResultados3x2_5x2_5 === 'function') {
-        mostrarResultados3x2_5x2_5(contenedor, resultado);
+        mostrarResultados3x2_5x2_5(contenedor, resultado, tipoModulo);
     } else if (medidaId === '4' && typeof mostrarResultados3x3x2_5 === 'function') {
         mostrarResultados3x3x2_5(contenedor, resultado);
     } else {
@@ -412,22 +412,8 @@ function imprimirResultados() {
                     <p><strong>Hora:</strong> ${new Date().toLocaleTimeString('es-MX')}</p>
                 </div>
                 
-                <!-- Informacion del pedido -->
-                <div class="resultado-info">
-                    <p><strong>Modulo:</strong> ${modulo}</p>
-                    <p><strong>Cantidad:</strong> ${cantidad} unidades</p>
-                    <p><strong>Medida:</strong> ${medida}</p>
-                </div>
-                
                 <!-- Contenido del despiece -->
                 ${contenidoModal.innerHTML}
-                
-                <!-- Pie de pagina con informacion -->
-                <div class="print-footer" style="border: none; margin-top: 30px;">
-                    <p><strong>STANDEX - Todos los derechos reservados © ${new Date().getFullYear()}</strong></p>
-                    <p>Documento generado automaticamente por el sistema de despiece</p>
-                    <p>Este documento es valido como cotizacion de materiales</p>
-                </div>
             </div>
         </body>
         </html>

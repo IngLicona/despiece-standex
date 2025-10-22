@@ -166,7 +166,7 @@ require_once 'php/verificar_sesion.php';
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="guardarDatos()">
                         <i class="fas fa-save me-2"></i>
-                        Guardar
+                        Obtener Despiece
                     </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         <i class="fas fa-times me-2"></i>
@@ -292,7 +292,7 @@ require_once 'php/verificar_sesion.php';
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="guardarDatosRegistro()">
                         <i class="fas fa-save me-2"></i>
-                        Guardar
+                        Obtener Despiece
                     </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         <i class="fas fa-times me-2"></i>
