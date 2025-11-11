@@ -8,7 +8,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 12,
             'LARGUERO_1940_ANTEPECHO': 2,
             'MAMPARA_964X2390': 6,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 1
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 1
         }
     },
     'CTL': {
@@ -18,7 +18,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 8,
             'LARGUERO_1940_ANTEPECHO': 4,
             'MAMPARA_964X2390': 4,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 2
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 2
         }
     },
     'ST': {
@@ -28,7 +28,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 8,
             'LARGUERO_1940_ANTEPECHO': 2,
             'MAMPARA_964X2390': 4,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 1
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 1
         }
     },
     'VTL': {
@@ -38,7 +38,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 8,
             'LARGUERO_1940_ANTEPECHO': 4,
             'MAMPARA_964X2390': 4,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 2
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 2
         }
     },
     'VTU': {
@@ -48,7 +48,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 12,
             'LARGUERO_1940_ANTEPECHO': 2,
             'MAMPARA_964X2390': 6,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 1
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 1
         }
     },
     'VTI': {
@@ -58,7 +58,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 4,
             'LARGUERO_1940_ANTEPECHO': 4,
             'MAMPARA_964X2390': 2,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 2
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 2
         }
     },
     'FT': {
@@ -68,7 +68,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 4,
             'LARGUERO_1940_ANTEPECHO': 4,
             'MAMPARA_964X2390': 2,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 2
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 2
         }
     },
     'EI': {
@@ -78,7 +78,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 4,
             'LARGUERO_1940_ANTEPECHO': 4,
             'MAMPARA_964X2390': 2,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 2
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 2
         }
     },
     'II': {
@@ -88,7 +88,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 6,
             'LARGUERO_1940_ANTEPECHO': 2,
             'MAMPARA_964X2390': 3,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 1
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 1
         }
     },
     'IT': {
@@ -98,7 +98,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 4,
             'LARGUERO_1940_ANTEPECHO': 3,
             'MAMPARA_964X2390': 2,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 1
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 1
         }
     },
     'VIT': {
@@ -108,7 +108,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 8,
             'LARGUERO_1940_ANTEPECHO': 3,
             'MAMPARA_964X2390': 4,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 1
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 1
         }
     },
     'CTIU': {
@@ -118,7 +118,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 8,
             'LARGUERO_1940_ANTEPECHO': 3,
             'MAMPARA_964X2390': 4,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 1
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 1
         }
     },
     'CTIL': {
@@ -128,7 +128,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 4,
             'LARGUERO_1940_ANTEPECHO': 5,
             'MAMPARA_964X2390': 2,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 2
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 2
         }
     },
     'REGISTROS': {
@@ -138,7 +138,7 @@ const despiece_2x2x2_5 = {
             'LARGUERO_950': 8,
             'LARGUERO_1940_ANTEPECHO': 2,
             'MAMPARA_964X2390': 4,
-            'MAMPARA_ANTEPECHO_CURVO_2400X300': 1
+            'MAMPARA_ANTEPECHO_CURVO_2174X255': 1
         }
     }
 };
@@ -160,33 +160,18 @@ function mostrarResultados2x2x2_5(contenedor, resultado){
         { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
         { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
         { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
-        { nombre: 'TOTAL PANEL ANTEPECHO CURVO 2400x300mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2400X300') }
+        { nombre: 'TOTAL PANEL ANTEPECHO CURVO 2174x255mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2174X255') }
     ]);
 
-    // Seccion 2: Factor de proteccion Stand Tipo 1
-    agregarSeccion(contenedor, 'FACTOR DE PROTECCION STAND TIPO 1', [
-        { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') + 10 },
-        { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') + 10 },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') + 10 },
-        { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') + 10 },
-        { nombre: 'TOTAL PANEL ANTEPECHO CURVO 2400x300mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2400X300') + 10 }
-    ]);
-
+    
     // Seccion 3: TOTALES STAND TIPO 2 (ANTEPECHO RECTO)
     agregarSeccion(contenedor, 'TOTALES STAND TIPO 2 (ANTEPECHO RECTO)', [
         { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
         { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
         { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
         { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
-        { nombre: 'TOTAL PANEL ANTEPECHO 1954x214mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2400X300') }
+        { nombre: 'TOTAL PANEL ANTEPECHO 1054x255mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2174X255') }
     ]);
 
-    // Seccion 4: Factor de proteccion Stand Tipo 2
-    agregarSeccion(contenedor, 'FACTOR DE PROTECCION STAND TIPO 2', [
-        { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') + 10 },
-        { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') + 10 },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') + 10 },
-        { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') + 10 },
-        { nombre: 'TOTAL PANEL ANTEPECHO 1954x214mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2400X300') + 10 }
-    ]);
+    
 }

@@ -57,7 +57,7 @@ require_once 'php/verificar_sesion.php';
                 <div class="cell vit pos-7-2">VIT</div>
 
                 <!-- Fila 3 -->
-                <div class="cell ctl pos-1-3">CTL</div>
+                <div class="cell se pos-1-3">SE</div>
                 <div class="cell it pos-8-3">IT</div>
 
                 <!-- Isla central -->
@@ -76,7 +76,7 @@ require_once 'php/verificar_sesion.php';
                 <div class="cell ft pos-9-4">FT</div>
 
                 <!-- Fila 5 -->
-                <div class="cell ctu pos-1-5">CTU</div>
+                <div class="cell sc pos-1-5">SC</div>
 
                 <!-- Fila 6 -->
                 <div class="cell st pos-1-6">ST</div>
@@ -93,8 +93,8 @@ require_once 'php/verificar_sesion.php';
 
             <!-- Leyenda -->
             <div class="legend">
-                <div class="legend-item" style="background: #3f51b5;">CABECERA DE TREN EN U (CTU)</div>
-                <div class="legend-item" style="background: #f44336;">CABECERA DE TREN EN L (CTL)</div>
+                <div class="legend-item" style="background: #3f51b5;">STAND EN CAJON (SC)</div>
+                <div class="legend-item" style="background: #f44336;">STAND EN ESQUINA (SE)</div>
                 <div class="legend-item" style="background: #4caf50;">STANDS EN TREN (ST)</div>
                 <div class="legend-item" style="background: #ff9800;">VUELTA TREN EN L (VTL)</div>
                 <div class="legend-item" style="background: #ffeb3b; color: #333;">VUELTA TREN EN U (VTU)</div>
@@ -266,9 +266,6 @@ require_once 'php/verificar_sesion.php';
                                 <option value="">Seleccione un tipo...</option>
                                 <option value="CR">Cabecera de Registro</option>
                                 <option value="RT">Registro en Tren</option>
-                                <option value="VT">Vuelta De Tren</option>
-                                <option value="CRC">Cabecera Registro Curvo</option>
-                                <option value="RTC">Registro en Tren Curvo</option>
                             </select>
                         </div>
 

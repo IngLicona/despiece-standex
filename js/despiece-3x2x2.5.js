@@ -240,16 +240,7 @@ function mostrarResultados3x2x2_5(contenedor, resultado) {
         { nombre: 'TOTAL PANEL ANTEPECHO 1954x214mm', cantidad: getCantidad('MAMPARA_1940_ANTEPECHO') }
     ]);
 
-    // Seccion 2: Factor de proteccion Stand tipo 3
-    agregarSeccion(contenedor, 'FACTOR DE PROTECCION STAND TIPO 3', [
-        { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') + 10 },
-        { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') + 10 },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 2930mm', cantidad: getCantidad('LARGUERO_ANTEPECHO_2930') + 10 },
-        { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') + 10 },
-        { nombre: 'TOTAL PANEL ANTEPECHO 2944x214mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_2944') + 10 },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') + 10 },
-        { nombre: 'TOTAL PANEL ANTEPECHO 1954x214mm', cantidad: getCantidad('MAMPARA_1940_ANTEPECHO') + 10 }
-    ]);
+    
 
     // Seccion 3: Totales Stand tipo 4 (Antepecho Recto de Panel Art con Ganchos)
     agregarSeccion(contenedor, 'Totales Stand tipo 4 (Antepecho Recto de Panel Art con Ganchos)', [
@@ -260,13 +251,6 @@ function mostrarResultados3x2x2_5(contenedor, resultado) {
         { nombre: 'TOTAL PANEL ART ANTEPECHO CON GANCHOS 1940x300mm', cantidad: getCantidad('MAMPARA_1940_ANTEPECHO') }
     ]);
 
-    // Seccion 4: Factor de proteccion Stand tipo 4
-    agregarSeccion(contenedor, 'FACTOR DE PROTECCION STAND TIPO 4', [
-        { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') + 10 },
-        { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') + 10 },
-        { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') + 10 },
-        { nombre: 'TOTAL PANEL ART ANTEPECHO CON GANCHOS 2930x300mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_2944') + 10 },
-        { nombre: 'TOTAL PANEL ART ANTEPECHO CON GANCHOS 1940x300mm', cantidad: getCantidad('MAMPARA_1940_ANTEPECHO') + 10 }
-    ]);
+    
 
 }
