@@ -2,8 +2,8 @@
 
 const despiece_3x2x2_5 = {
     // Cabecera de Tren en U
-    'CTU': {
-        nombre: 'Cabecera de Tren en U',
+    'SC': {
+        nombre: 'Stand en Cajon',
         componentes: {
             'POSTES_2500': 8,
             'LARGUERO_950': 14,
@@ -20,8 +20,8 @@ const despiece_3x2x2_5 = {
         }
     },
     // Cabecera de Tren en L
-    'CTL': {
-        nombre: 'Cabecera de Tren en L',
+    'SE': {
+        nombre: 'Stand en Esquina',
         componentes: {
             'POSTES_2500': 7,
             'LARGUERO_950': 10,
@@ -219,7 +219,7 @@ const despiece_3x2x2_5 = {
 };
 
 // Funcion para mostrar los resultados en el modal de medida 3x2x2.5
-function mostrarResultados3x2x2_5(contenedor, resultado) {
+function mostrarResultados3x2x2_5(contenedor, resultado, tipoResultado) {
     // Obtener la referencia a los componentes del resultado
     const componentes = resultado.componentes;
     
@@ -229,28 +229,26 @@ function mostrarResultados3x2x2_5(contenedor, resultado) {
         return comp ? comp.cantidadTotal : 0;
     }
     
-    // Seccion 1: Totales Stands tipo 3 (Antepecho Recto)
-    agregarSeccion(contenedor, 'Totales Stands tipo 3 (Antepecho Recto)', [
-        { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
-        { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 2930mm', cantidad: getCantidad('LARGUERO_ANTEPECHO_2930') },
-        { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
-        { nombre: 'TOTAL PANEL ANTEPECHO 2944x214mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_2944') },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
-        { nombre: 'TOTAL PANEL ANTEPECHO 1954x214mm', cantidad: getCantidad('MAMPARA_1940_ANTEPECHO') }
-    ]);
-
-    
-
-    // Seccion 3: Totales Stand tipo 4 (Antepecho Recto de Panel Art con Ganchos)
-    agregarSeccion(contenedor, 'Totales Stand tipo 4 (Antepecho Recto de Panel Art con Ganchos)', [
-        { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
-        { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
-        { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
-        { nombre: 'TOTAL PANEL ART ANTEPECHO CON GANCHOS 2930x300mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_2944') },
-        { nombre: 'TOTAL PANEL ART ANTEPECHO CON GANCHOS 1940x300mm', cantidad: getCantidad('MAMPARA_1940_ANTEPECHO') }
-    ]);
-
-    
-
+    // Mostrar solo el tipo seleccionado
+    if (tipoResultado === 'TIPO3') {
+        // Seccion 1: Totales Stands tipo 3 (Antepecho Recto)
+        agregarSeccion(contenedor, 'Totales Stands tipo 3 (Antepecho Recto)', [
+            { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
+            { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
+            { nombre: 'TOTAL LARGUERO ANTEPECHO 2930mm', cantidad: getCantidad('LARGUERO_ANTEPECHO_2930') },
+            { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
+            { nombre: 'TOTAL PANEL ANTEPECHO 2944x214mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_2944') },
+            { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
+            { nombre: 'TOTAL PANEL ANTEPECHO 1954x214mm', cantidad: getCantidad('MAMPARA_1940_ANTEPECHO') }
+        ]);
+    } else if (tipoResultado === 'TIPO4') {
+        // Seccion 3: Totales Stand tipo 4 (Antepecho Recto de Panel Art con Ganchos)
+        agregarSeccion(contenedor, 'Totales Stand tipo 4 (Antepecho Recto de Panel Art con Ganchos)', [
+            { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
+            { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
+            { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
+            { nombre: 'TOTAL PANEL ART ANTEPECHO CON GANCHOS 2930x300mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_2944') },
+            { nombre: 'TOTAL PANEL ART ANTEPECHO CON GANCHOS 1940x300mm', cantidad: getCantidad('MAMPARA_1940_ANTEPECHO') }
+        ]);
+    }
 }

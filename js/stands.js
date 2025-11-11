@@ -21,6 +21,60 @@ function cargarMedidas() {
     });
 }
 
+// Funcion para cargar tipos de resultado segun la medida
+function cargarTiposResultado() {
+    const medidaId = document.getElementById('medidaSelect').value;
+    const tipoSelect = document.getElementById('tipoResultadoSelect');
+    
+    // Limpiar el select
+    tipoSelect.innerHTML = '<option value="">Seleccione un tipo...</option>';
+    
+    if (!medidaId) {
+        tipoSelect.disabled = true;
+        tipoSelect.innerHTML = '<option value="">Primero seleccione una medida...</option>';
+        return;
+    }
+    
+    let tipos = [];
+    
+    // Definir tipos segun la medida
+    if (medidaId === '1') { // 2x2x2.5
+        tipos = [
+            { valor: 'TIPO1', nombre: 'STAND TIPO 1 (ANTEPECHO CURVO)' },
+            { valor: 'TIPO2', nombre: 'STAND TIPO 2 (ANTEPECHO RECTO)' }
+        ];
+    } else if (medidaId === '2') { // 3x2x2.5
+        tipos = [
+            { valor: 'TIPO3', nombre: 'STAND TIPO 3 (ANTEPECHO RECTO)' },
+            { valor: 'TIPO4', nombre: 'STAND TIPO 4 (ANTEPECHO RECTO DE PANEL ART CON GANCHOS)' }
+        ];
+    } else if (medidaId === '3') { // 3x2.5x2.5
+        tipos = [
+            { valor: 'TIPO1', nombre: 'STAND TIPO 1 (ANTEPECHO CURVO LATERAL)' },
+            { valor: 'TIPO2', nombre: 'STAND TIPO 2 (ANTEPECHO CURVO AL CENTRO)' },
+            { valor: 'TIPO3', nombre: 'STAND TIPO 3 (ANTEPECHO RECTO)' },
+            { valor: 'TIPO4', nombre: 'STAND TIPO 4 (ANTEPECHO RECTO DE PANEL ART CON GANCHOS)' }
+        ];
+    } else if (medidaId === '4') { // 3x3x2.5
+        tipos = [
+            { valor: 'TIPO1', nombre: 'STAND TIPO 1 (ANTEPECHO CURVO LATERAL)' },
+            { valor: 'TIPO2', nombre: 'STAND TIPO 2 (ANTEPECHO CURVO AL CENTRO)' },
+            { valor: 'TIPO3', nombre: 'STAND TIPO 3 (ANTEPECHO RECTO)' },
+            { valor: 'TIPO4', nombre: 'STAND TIPO 4 (ANTEPECHO RECTO DE PANEL ART CON GANCHOS)' }
+        ];
+    }
+    
+    // Agregar opciones al select
+    tipos.forEach(tipo => {
+        const option = document.createElement('option');
+        option.value = tipo.valor;
+        option.textContent = tipo.nombre;
+        tipoSelect.appendChild(option);
+    });
+    
+    tipoSelect.disabled = false;
+}
+
 // Funcion para validar que el numero sea mayor a cero
 function validarNumero(input) {
     const valor = input.value;
@@ -38,10 +92,11 @@ function validarNumero(input) {
 // Funcion para guardar los datos cuando se presiona el boton
 function guardarDatos() {
     const medidaId = document.getElementById('medidaSelect').value;
+    const tipoResultado = document.getElementById('tipoResultadoSelect').value;
     const numStands = document.getElementById('numStands').value;
     
-    // Verificar que ambos campos tengan valor
-    if (!medidaId || !numStands) {
+    // Verificar que todos los campos tengan valor
+    if (!medidaId || !tipoResultado || !numStands) {
         alert('Por favor completa todos los campos');
         return;
     }
@@ -65,10 +120,10 @@ function guardarDatos() {
     // Mostrar los resultados en consola
     const modalInfo = bootstrap.Modal.getInstance(document.getElementById('infoModal'));
     modalInfo.hide();
-    mostrarResultados(resultado, medidaDescripcion, tipoModulo);
+    mostrarResultados(resultado, medidaDescripcion, tipoModulo, tipoResultado);
 }
 
-function mostrarResultados(resultado, medidaDescripcion, tipoModulo) {
+function mostrarResultados(resultado, medidaDescripcion, tipoModulo, tipoResultado) {
     document.getElementById('resultModulo').textContent = resultado.modulo;
     document.getElementById('resultCantidad').textContent = resultado.cantidad;
     document.getElementById('resultMedida').textContent = medidaDescripcion;
@@ -80,13 +135,13 @@ function mostrarResultados(resultado, medidaDescripcion, tipoModulo) {
     
     // Seleccionar la funcion de visualizacion segun la medida
     if (medidaId === '1' && typeof mostrarResultados2x2x2_5 === 'function') {
-        mostrarResultados2x2x2_5(contenedor, resultado);
+        mostrarResultados2x2x2_5(contenedor, resultado, tipoResultado);
     } else if (medidaId === '2' && typeof mostrarResultados3x2x2_5 === 'function') {
-        mostrarResultados3x2x2_5(contenedor, resultado);
+        mostrarResultados3x2x2_5(contenedor, resultado, tipoResultado);
     } else if (medidaId === '3' && typeof mostrarResultados3x2_5x2_5 === 'function') {
-        mostrarResultados3x2_5x2_5(contenedor, resultado, tipoModulo);
+        mostrarResultados3x2_5x2_5(contenedor, resultado, tipoModulo, tipoResultado);
     } else if (medidaId === '4' && typeof mostrarResultados3x3x2_5 === 'function') {
-        mostrarResultados3x3x2_5(contenedor, resultado);
+        mostrarResultados3x3x2_5(contenedor, resultado, tipoResultado);
     } else {
         mostrarTablaGenerica(contenedor, resultado);
     }
@@ -511,11 +566,11 @@ document.querySelectorAll('.cell').forEach(cell => {
         // Para otros stands, mostrar modal normal
         let description = '';
         switch(standType) {
-            case 'CTU':
-                description = 'Cabecera de Tren en U - CTU';
+            case 'SC':
+                description = 'Stand en Cajon - SC';
                 break;
-            case 'CTL':
-                description = 'Cabecera de Tren en L - CTL';
+            case 'SE':
+                description = 'Stand en Esquina - SE';
                 break;
             case 'ST':
                 description = 'Stands en Tren - ST';

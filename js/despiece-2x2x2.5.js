@@ -1,8 +1,8 @@
 // Despiece para medida 2.00 x 2.00 x 2.50 M
 
 const despiece_2x2x2_5 = {
-    'CTU': {
-        nombre: 'Cabecera de Tren en U',
+    'SC': {
+        nombre: 'Stand en Cajon',
         componentes: {
             'POSTES_2500': 7,
             'LARGUERO_950': 12,
@@ -11,8 +11,8 @@ const despiece_2x2x2_5 = {
             'MAMPARA_ANTEPECHO_CURVO_2174X255': 1
         }
     },
-    'CTL': {
-        nombre: 'Cabecera de Tren en L',
+    'SE': {
+        nombre: 'Stand en Esquina',
         componentes: {
             'POSTES_2500': 6,
             'LARGUERO_950': 8,
@@ -144,7 +144,7 @@ const despiece_2x2x2_5 = {
 };
 
 // Funcion para mostrar los resultados en el modal de medida 2x2x2.5
-function mostrarResultados2x2x2_5(contenedor, resultado){
+function mostrarResultados2x2x2_5(contenedor, resultado, tipoResultado){
     // Obtener la referencia a los componentes del resultado
     const componentes = resultado.componentes;
 
@@ -154,24 +154,24 @@ function mostrarResultados2x2x2_5(contenedor, resultado){
         return comp ? comp.cantidadTotal : 0;
     }
 
-    // Seccion 1: TOTALES STAND TIPO 1 (ANTEPECHO CURVO)
-    agregarSeccion(contenedor, 'TOTALES STAND TIPO 1 (ANTEPECHO CURVO)', [
-        { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
-        { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
-        { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
-        { nombre: 'TOTAL PANEL ANTEPECHO CURVO 2174x255mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2174X255') }
-    ]);
-
-    
-    // Seccion 3: TOTALES STAND TIPO 2 (ANTEPECHO RECTO)
-    agregarSeccion(contenedor, 'TOTALES STAND TIPO 2 (ANTEPECHO RECTO)', [
-        { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
-        { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
-        { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
-        { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
-        { nombre: 'TOTAL PANEL ANTEPECHO 1054x255mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2174X255') }
-    ]);
-
-    
+    // Mostrar solo el tipo seleccionado
+    if (tipoResultado === 'TIPO1') {
+        // Seccion 1: TOTALES STAND TIPO 1 (ANTEPECHO CURVO)
+        agregarSeccion(contenedor, 'TOTALES STAND TIPO 1 (ANTEPECHO CURVO)', [
+            { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
+            { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
+            { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
+            { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
+            { nombre: 'TOTAL PANEL ANTEPECHO CURVO 2174x255mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2174X255') }
+        ]);
+    } else if (tipoResultado === 'TIPO2') {
+        // Seccion 3: TOTALES STAND TIPO 2 (ANTEPECHO RECTO)
+        agregarSeccion(contenedor, 'TOTALES STAND TIPO 2 (ANTEPECHO RECTO)', [
+            { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
+            { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
+            { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
+            { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
+            { nombre: 'TOTAL PANEL ANTEPECHO 1054x255mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2174X255') }
+        ]);
+    }
 }

@@ -141,8 +141,18 @@ require_once 'php/verificar_sesion.php';
                                 <i class="fas fa-ruler me-2"></i>
                                 Selecciona la medida:
                             </label>
-                            <select class="form-select" id="medidaSelect" required>
+                            <select class="form-select" id="medidaSelect" required onchange="cargarTiposResultado()">
                                 <option value="">Seleccione una medida...</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="tipoResultadoSelect" class="form-label">
+                                <i class="fas fa-list me-2"></i>
+                                Tipo de Resultado:
+                            </label>
+                            <select class="form-select" id="tipoResultadoSelect" required disabled>
+                                <option value="">Primero seleccione una medida...</option>
                             </select>
                         </div>
 
