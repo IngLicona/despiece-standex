@@ -534,14 +534,53 @@ function calcularMaterialesRegistro(tipoRegistro, cantidad) {
         componentes: []
     };
     
-    for (let componenteKey in registroData.componentes) {
-        const cantidadBase = registroData.componentes[componenteKey];
-        const cantidadTotal = cantidadBase * cantidad;
+    // Si es Registro en Tren, agregar 1 Cabecera de Registro
+    if (tipoRegistro === 'RT') {
+        const cabecera = registro['CR'];
         
-        resultado.componentes.push({
-            codigo: componenteKey,
-            cantidadTotal: cantidadTotal
-        });
+        // Primero agregar los componentes del RT multiplicados por la cantidad
+        for (let componenteKey in registroData.componentes) {
+            const cantidadBase = registroData.componentes[componenteKey];
+            const cantidadTotal = cantidadBase * cantidad;
+            
+            resultado.componentes.push({
+                codigo: componenteKey,
+                cantidadTotal: cantidadTotal
+            });
+        }
+        
+        // Luego sumar 1 CR a los componentes existentes
+        for (let componenteKey in cabecera.componentes) {
+            const cantidadCR = cabecera.componentes[componenteKey];
+            
+            // Buscar si el componente ya existe en el resultado
+            const componenteExistente = resultado.componentes.find(c => c.codigo === componenteKey);
+            
+            if (componenteExistente) {
+                // Si existe, sumar la cantidad de 1 CR
+                componenteExistente.cantidadTotal += cantidadCR;
+            } else {
+                // Si no existe, agregarlo
+                resultado.componentes.push({
+                    codigo: componenteKey,
+                    cantidadTotal: cantidadCR
+                });
+            }
+        }
+        
+        // Actualizar el nombre para indicar que incluye CR
+        resultado.modulo = registroData.nombre + ' + 1 Cabecera de Registro';
+    } else {
+        // Para CR u otros, calcular normalmente
+        for (let componenteKey in registroData.componentes) {
+            const cantidadBase = registroData.componentes[componenteKey];
+            const cantidadTotal = cantidadBase * cantidad;
+            
+            resultado.componentes.push({
+                codigo: componenteKey,
+                cantidadTotal: cantidadTotal
+            });
+        }
     }
     
     return resultado;
