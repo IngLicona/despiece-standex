@@ -154,24 +154,31 @@ function mostrarResultados2x2x2_5(contenedor, resultado, tipoResultado){
         return comp ? comp.cantidadTotal : 0;
     }
 
+    // Array para guardar los materiales que se mostrarán
+    let materialesFiltrados = [];
+
     // Mostrar solo el tipo seleccionado
     if (tipoResultado === 'TIPO1') {
-        // Seccion 1: TOTALES STAND TIPO 1 (ANTEPECHO CURVO)
-        agregarSeccion(contenedor, 'TOTALES STAND TIPO 1 (ANTEPECHO CURVO)', [
-            { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
-            { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
-            { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
-            { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
-            { nombre: 'TOTAL PANEL ANTEPECHO CURVO 2174x255mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2174X255') }
-        ]);
+        materialesFiltrados = [
+            { codigo: 'POSTES_2500', nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
+            { codigo: 'LARGUERO_950', nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
+            { codigo: 'LARGUERO_1940_ANTEPECHO', nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
+            { codigo: 'MAMPARA_964X2390', nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
+            { codigo: 'MAMPARA_ANTEPECHO_CURVO_2174X255', nombre: 'TOTAL PANEL ANTEPECHO CURVO 2174x255mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2174X255') }
+        ];
+        agregarSeccion(contenedor, 'TOTALES STAND TIPO 1 (ANTEPECHO CURVO)', materialesFiltrados.map(m => ({ nombre: m.nombre, cantidad: m.cantidad })));
+        
     } else if (tipoResultado === 'TIPO2') {
-        // Seccion 3: TOTALES STAND TIPO 2 (ANTEPECHO RECTO)
-        agregarSeccion(contenedor, 'TOTALES STAND TIPO 2 (ANTEPECHO RECTO)', [
-            { nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
-            { nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
-            { nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
-            { nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
-            { nombre: 'TOTAL PANEL ANTEPECHO 1054x255mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2174X255') }
-        ]);
+        materialesFiltrados = [
+            { codigo: 'POSTES_2500', nombre: 'TOTAL POSTES 2500mm', cantidad: getCantidad('POSTES_2500') },
+            { codigo: 'LARGUERO_950', nombre: 'TOTAL LARGUERO 950mm', cantidad: getCantidad('LARGUERO_950') },
+            { codigo: 'LARGUERO_1940_ANTEPECHO', nombre: 'TOTAL LARGUERO ANTEPECHO 1940mm', cantidad: getCantidad('LARGUERO_1940_ANTEPECHO') },
+            { codigo: 'MAMPARA_964X2390', nombre: 'TOTAL MAMPARA 964x2390mm', cantidad: getCantidad('MAMPARA_964X2390') },
+            { codigo: 'MAMPARA_ANTEPECHO_CURVO_2174X255', nombre: 'TOTAL PANEL ANTEPECHO 1054x255mm', cantidad: getCantidad('MAMPARA_ANTEPECHO_CURVO_2174X255') }
+        ];
+        agregarSeccion(contenedor, 'TOTALES STAND TIPO 2 (ANTEPECHO RECTO)', materialesFiltrados.map(m => ({ nombre: m.nombre, cantidad: m.cantidad })));
     }
+    
+    // RETORNAR los materiales filtrados
+    return materialesFiltrados;
 }

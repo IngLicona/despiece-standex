@@ -124,6 +124,9 @@ function guardarDatos() {
 }
 
 function mostrarResultados(resultado, medidaDescripcion, tipoModulo, tipoResultado) {
+    // Obtener el ID de la medida
+    const medidaId = document.getElementById('medidaSelect').value;
+    
     document.getElementById('resultModulo').textContent = resultado.modulo;
     document.getElementById('resultCantidad').textContent = resultado.cantidad;
     document.getElementById('resultMedida').textContent = medidaDescripcion;
@@ -131,20 +134,31 @@ function mostrarResultados(resultado, medidaDescripcion, tipoModulo, tipoResulta
     const contenedor = document.getElementById('contenedorResultados');
     contenedor.innerHTML = '';
     
-    const medidaId = document.getElementById('medidaSelect').value;
+    // Variable para guardar los materiales filtrados
+    let materialesFiltrados = [];
     
     // Seleccionar la funcion de visualizacion segun la medida
     if (medidaId === '1' && typeof mostrarResultados2x2x2_5 === 'function') {
-        mostrarResultados2x2x2_5(contenedor, resultado, tipoResultado);
+        materialesFiltrados = mostrarResultados2x2x2_5(contenedor, resultado, tipoResultado);
     } else if (medidaId === '2' && typeof mostrarResultados3x2x2_5 === 'function') {
-        mostrarResultados3x2x2_5(contenedor, resultado, tipoResultado);
+        materialesFiltrados = mostrarResultados3x2x2_5(contenedor, resultado, tipoResultado);
     } else if (medidaId === '3' && typeof mostrarResultados3x2_5x2_5 === 'function') {
-        mostrarResultados3x2_5x2_5(contenedor, resultado, tipoModulo, tipoResultado);
+        materialesFiltrados = mostrarResultados3x2_5x2_5(contenedor, resultado, tipoModulo, tipoResultado);
     } else if (medidaId === '4' && typeof mostrarResultados3x3x2_5 === 'function') {
-        mostrarResultados3x3x2_5(contenedor, resultado, tipoResultado);
+        materialesFiltrados = mostrarResultados3x3x2_5(contenedor, resultado, tipoResultado);
     } else {
         mostrarTablaGenerica(contenedor, resultado);
     }
+    
+    // Guardar el resultado actual CON los materiales filtrados
+    window.ultimoCalculo = {
+        resultado: resultado,
+        materialesFiltrados: materialesFiltrados, // AGREGAR ESTA LÍNEA
+        medidaDescripcion: medidaDescripcion,
+        medidaId: medidaId,
+        tipoModulo: tipoModulo,
+        tipoResultado: tipoResultado
+    };
     
     const modalResultados = new bootstrap.Modal(document.getElementById('resultadosModal'));
     modalResultados.show();
