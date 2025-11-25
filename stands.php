@@ -105,8 +105,8 @@ require_once 'php/verificar_sesion.php';
                 <div class="legend-item" style="background: #00bcd4;">INTERMEDIO DE ISLA (II)</div>
                 <div class="legend-item" style="background: #9e9e9e;">INTERMEDIO DE TREN (IT)</div>
                 <div class="legend-item" style="background: #2196f3;">VUELTA INTERMEDIO DE TREN (VIT)</div>
-                <div class="legend-item" style="background: #cddc39; color: #333;">CABECERA DE TREN A EN U (CTIU)</div>
-                <div class="legend-item" style="background: #ff5722;">CABECERA DE TREN A EN L (CTIL)</div>
+                <div class="legend-item" style="background: #cddc39; color: #333;">CABECERA DE TREN INTERMEDIA EN U (CTIU)</div>
+                <div class="legend-item" style="background: #ff5722;">CABECERA DE TREN INTERMEDIA EN L (CTIL)</div>
                 <div class="legend-item" style="background: #009688;">STAND DE REGISTROS (REGISTROS)</div>
             </div>
         </div>
@@ -214,7 +214,7 @@ require_once 'php/verificar_sesion.php';
                     <div id="contenedorResultados"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" onclick="agregarACalculadora()">
+                    <button type="button" class="btn btn-success" id="btnAgregarCalculadora" onclick="agregarACalculadora()">
                         <i class="fas fa-plus-circle me-2"></i>
                         Agregar a Calculadora
                     </button>
@@ -432,7 +432,7 @@ require_once 'php/verificar_sesion.php';
                         <i class="fas fa-eraser me-2"></i>
                         Limpiar Todo
                     </button>
-                    <button type="button" class="btn btn-success">
+                    <button type="button" class="btn btn-success" onclick="calcularTotalConsolidado()"">
                         <i class="fas fa-calculator me-2"></i>
                         Calcular Total
                     </button>

@@ -157,8 +157,15 @@ function mostrarResultados(resultado, medidaDescripcion, tipoModulo, tipoResulta
         medidaDescripcion: medidaDescripcion,
         medidaId: medidaId,
         tipoModulo: tipoModulo,
-        tipoResultado: tipoResultado
+        tipoResultado: tipoResultado,
+        esRegistro: false // NO es un registro, se puede agregar a calculadora
     };
+    
+    // Mostrar el botón de agregar a calculadora para stands normales
+    const btnAgregar = document.getElementById('btnAgregarCalculadora');
+    if (btnAgregar) {
+        btnAgregar.style.display = 'inline-block';
+    }
     
     const modalResultados = new bootstrap.Modal(document.getElementById('resultadosModal'));
     modalResultados.show();
@@ -531,6 +538,18 @@ function guardarDatosRegistro() {
     
     mostrarResultadosRegistro(contenedor, resultado);
     
+    // Guardar en window.ultimoCalculo marcando que es un registro
+    window.ultimoCalculo = {
+        resultado: resultado,
+        esRegistro: true // Marcar como registro para ocultar el botón de agregar a calculadora
+    };
+    
+    // Ocultar el botón de agregar a calculadora para registros
+    const btnAgregar = document.getElementById('btnAgregarCalculadora');
+    if (btnAgregar) {
+        btnAgregar.style.display = 'none';
+    }
+    
     const modalResultados = new bootstrap.Modal(document.getElementById('resultadosModal'));
     modalResultados.show();
 }
@@ -653,10 +672,10 @@ document.querySelectorAll('.cell').forEach(cell => {
                 description = 'Vuelta Intermedio de Tren - VIT';
                 break;
             case 'CTIU':
-                description = 'Cabecera de Tren A en U - CTIU';
+                description = 'Cabecera de Tren Intermedia en U - CTIU';
                 break;
             case 'CTIL':
-                description = 'Cabecera de Tren A en L - CTIL';
+                description = 'Cabecera de Tren Intermedia en L - CTIL';
                 break;
             default:
                 description = 'Información no disponible';

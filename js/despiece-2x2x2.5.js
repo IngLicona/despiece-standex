@@ -112,7 +112,7 @@ const despiece_2x2x2_5 = {
         }
     },
     'CTIU': {
-        nombre: 'Cabecera de Tren A en U',
+        nombre: 'Cabecera de Tren Intermedia en U',
         componentes: {
             'POSTES_2500': 6,
             'LARGUERO_950': 8,
@@ -122,7 +122,7 @@ const despiece_2x2x2_5 = {
         }
     },
     'CTIL': {
-        nombre: 'Cabecera de Tren A en L',
+        nombre: 'Cabecera de Tren Intermedia en L',
         componentes: {
             'POSTES_2500': 5,
             'LARGUERO_950': 4,

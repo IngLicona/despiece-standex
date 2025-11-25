@@ -98,6 +98,12 @@ function agregarACalculadora() {
         return;
     }
     
+    // Verificar que NO sea un registro (validación de seguridad)
+    if (window.ultimoCalculo.esRegistro === true) {
+        alert('Los registros no se pueden agregar a la calculadora');
+        return;
+    }
+    
     // Verificar que existan materiales filtrados
     if (!window.ultimoCalculo.materialesFiltrados || window.ultimoCalculo.materialesFiltrados.length === 0) {
         alert('No hay materiales para agregar');
@@ -165,4 +171,110 @@ document.addEventListener('DOMContentLoaded', function() {
     cargarCalculosGuardados();
 });
 
+function calcularTotalConsolidado() {
+    if (calculosGuardados.length === 0) {
+        alert('No hay cálculos guardados para consolidar.');
+        return;
+    }
 
+    const materialesConsolidados = {};
+
+     // Recorrer cada cálculo guardado
+    calculosGuardados.forEach(function(calculo) {
+        
+        // Recorrer cada material del cálculo
+        calculo.componentes.forEach(function(componente) {
+            
+            const codigo = componente.codigo;
+            const cantidad = componente.cantidad;
+            const nombre = componente.nombre;
+            
+            
+            if (materialesConsolidados[codigo]) {
+                // SÍ existe: SUMAR la cantidad
+                materialesConsolidados[codigo].cantidad += cantidad;
+            } else {
+                // NO existe: AGREGARLO por primera vez
+                materialesConsolidados[codigo] = {
+                    codigo: codigo,
+                    nombre: nombre,
+                    cantidad: cantidad
+                };
+            }
+        });
+    });
+
+    const arrayConsolidado = Object.values(materialesConsolidados);
+
+    mostrarResumenTotal(arrayConsolidado);
+}
+
+function mostrarResumenTotal(materiales) {
+    const contenedor = document.getElementById('contenedorResumenTotal');
+    contenedor.innerHTML = '';
+    
+    // Crear la tabla
+    const tabla = document.createElement('table');
+    tabla.className = 'table table-striped table-hover mb-0';
+    
+    // Crear encabezado
+    const thead = document.createElement('thead');
+    thead.className = 'table-dark';
+    thead.innerHTML = `
+        <tr>
+            <th width="10%" class="text-center">#</th>
+            <th width="60%">Componente</th>
+            <th width="30%" class="text-end">Cantidad Total</th>
+        </tr>
+    `;
+    tabla.appendChild(thead);
+    
+    // Crear cuerpo
+    const tbody = document.createElement('tbody');
+    let totalPiezas = 0;
+    
+    materiales.forEach(function(material, index) {
+        totalPiezas += material.cantidad;
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td class="text-center fw-bold">${index + 1}</td>
+            <td>${material.nombre}</td>
+            <td class="text-end">
+                <span class="badge bg-primary fs-6">${material.cantidad}</span>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+    
+    // Fila de total
+    const trTotal = document.createElement('tr');
+    trTotal.className = 'table-secondary fw-bold';
+    trTotal.innerHTML = `
+        <td colspan="2" class="text-end">
+            <i class="fas fa-calculator me-2"></i>
+            TOTAL DE PIEZAS:
+        </td>
+        <td class="text-end">
+            <span class="badge bg-success fs-5">${totalPiezas}</span>
+        </td>
+    `;
+    tbody.appendChild(trTotal);
+    
+    tabla.appendChild(tbody);
+    contenedor.appendChild(tabla);
+    
+    // Actualizar estadísticas
+    document.getElementById('totalCalculos').textContent = calculosGuardados.length;
+    document.getElementById('totalStandsResumen').textContent = calculosGuardados.reduce((sum, c) => sum + c.cantidad, 0);
+    document.getElementById('totalComponentes').textContent = materiales.length;
+    
+    // Cerrar modal de calculadora y abrir modal de resumen
+    const modalCalculadora = bootstrap.Modal.getInstance(document.getElementById('calculadoraModal'));
+    if (modalCalculadora) {
+        modalCalculadora.hide();
+    }
+    
+    const modalResumen = new bootstrap.Modal(document.getElementById('resumenTotalModal'));
+    modalResumen.show();
+}

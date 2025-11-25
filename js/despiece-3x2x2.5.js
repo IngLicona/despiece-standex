@@ -189,9 +189,9 @@ const despiece_3x2x2_5 = {
             'MAMPARA_ANTEPECHO_2944': 1
         }
     },
-    // Cabecera de Tren A en U
+    // Cabecera de Tren Intermedia en U
     'CTIU': {
-        nombre: 'Cabecera de Tren A en U',
+        nombre: 'Cabecera de Tren Intermedia en U',
         componentes: {
             'POSTES_2500': 7,
             'LARGUERO_950': 10,
@@ -202,9 +202,9 @@ const despiece_3x2x2_5 = {
             'MAMPARA_ANTEPECHO_2944': 1
         }
     },
-    // Cabecera de Tren A en L
+    // Cabecera de Tren Intermedia en L
     'CTIL': {
-        nombre: 'Cabecera de Tren A en L',
+        nombre: 'Cabecera de Tren Intermedia en L',
         componentes: {
             'POSTES_2500': 6,
             'LARGUERO_950': 6,
