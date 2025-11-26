@@ -97,7 +97,7 @@ function guardarDatos() {
     
     // Verificar que todos los campos tengan valor
     if (!medidaId || !tipoResultado || !numStands) {
-        alert('Por favor completa todos los campos');
+        mostrarAlerta('Por favor completa todos los campos', 'warning');
         return;
     }
     
@@ -113,7 +113,7 @@ function guardarDatos() {
     
     // Mostrar resultados
     if (resultado.error) {
-        alert(resultado.mensaje);
+        mostrarAlerta(resultado.mensaje, 'error');
         return;
     }
     
@@ -512,7 +512,7 @@ function guardarDatosRegistro() {
     const numRegistros = document.getElementById('numRegistros').value;
     
     if (!tipoRegistro || !numRegistros) {
-        alert('Por favor completa todos los campos');
+        mostrarAlerta('Por favor completa todos los campos', 'warning');
         return;
     }
     
@@ -520,7 +520,7 @@ function guardarDatosRegistro() {
     const resultado = calcularMaterialesRegistro(tipoRegistro, parseInt(numRegistros));
     
     if (resultado.error) {
-        alert(resultado.mensaje);
+        mostrarAlerta(resultado.mensaje, 'error');
         return;
     }
     

@@ -428,11 +428,11 @@ require_once 'php/verificar_sesion.php';
 
                 <!-- Pie del modal -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger">
+                    <button type="button" class="btn btn-danger" onclick="limpiarTodo()">
                         <i class="fas fa-eraser me-2"></i>
                         Limpiar Todo
                     </button>
-                    <button type="button" class="btn btn-success" onclick="calcularTotalConsolidado()"">
+                    <button type="button" class="btn btn-success" onclick="calcularTotalConsolidado()">
                         <i class="fas fa-calculator me-2"></i>
                         Calcular Total
                     </button>
@@ -572,13 +572,137 @@ require_once 'php/verificar_sesion.php';
                         <i class="fas fa-times me-2"></i>
                         Cerrar
                     </button>
-                    <button type="button" class="btn btn-success">
+                    <button type="button" class="btn btn-success" onclick="exportarAExcel()">
                         <i class="fas fa-file-excel me-2"></i>
                         Exportar a Excel
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" onclick="imprimirResumenTotal()">
                         <i class="fas fa-print me-2"></i>
                         Imprimir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Editar Cálculo -->
+    <div class="modal fade" id="editarCalculoModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-edit me-2"></i>
+                        Editar Cálculo
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="description-container mb-3">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <div>
+                            <p class="mb-0"><strong>Módulo:</strong> <span id="editNombreModulo"></span></p>
+                        </div>
+                    </div>
+
+                    <form id="editForm" class="mt-4">
+                        <div class="mb-4">
+                            <label for="editMedidaSelect" class="form-label">
+                                <i class="fas fa-ruler me-2"></i>
+                                Medida:
+                            </label>
+                            <select class="form-select" id="editMedidaSelect" required disabled>
+                                <option value="">Seleccione una medida...</option>
+                            </select>
+                            <small class="text-muted">La medida no se puede cambiar. Para usar otra medida, cree un nuevo cálculo.</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="editTipoResultadoSelect" class="form-label">
+                                <i class="fas fa-list me-2"></i>
+                                Tipo de Resultado:
+                            </label>
+                            <select class="form-select" id="editTipoResultadoSelect" required>
+                                <option value="">Seleccione un tipo...</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editNumStands" class="form-label">
+                                <i class="fas fa-sort-numeric-up me-2"></i>
+                                Número de stands:
+                            </label>
+                            <input type="number"
+                                class="form-control"
+                                id="editNumStands"
+                                min="1"
+                                required
+                                placeholder="Ingrese la cantidad">
+                            <div class="invalid-feedback">
+                                Por favor ingrese un número válido mayor a 0
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="guardarEdicionCalculo()">
+                        <i class="fas fa-save me-2"></i>
+                        Guardar Cambios
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Alerta Personalizada -->
+    <div class="modal fade" id="alertModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" id="alertModalHeader">
+                    <h5 class="modal-title" id="alertModalTitle">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Información
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="alertModalBody">
+                    <!-- Mensaje dinámico -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                        <i class="fas fa-check me-2"></i>
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación Personalizada -->
+    <div class="modal fade" id="confirmModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title text-dark">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Confirmación
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="confirmModalBody">
+                    <!-- Mensaje dinámico -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn btn-danger" id="confirmModalBtn">
+                        <i class="fas fa-check me-2"></i>
+                        Confirmar
                     </button>
                 </div>
             </div>
@@ -599,12 +723,78 @@ require_once 'php/verificar_sesion.php';
 
     <script>
         let logoutModal;
-
+        let alertModalInstance;
+        let confirmModalInstance;
+        let confirmCallback = null;
 
         document.addEventListener('DOMContentLoaded', function() {
             // Crear instancia del modal de logout
             logoutModal = new bootstrap.Modal(document.getElementById('logoutModal'));
+            
+            // Crear instancias de modales personalizados
+            alertModalInstance = new bootstrap.Modal(document.getElementById('alertModal'));
+            confirmModalInstance = new bootstrap.Modal(document.getElementById('confirmModal'));
+            
+            // Cargar medidas en el select de edición
+            cargarMedidasEdicion();
+            
+            // Event listener para el botón de confirmar
+            document.getElementById('confirmModalBtn').addEventListener('click', function() {
+                if (confirmCallback) {
+                    confirmCallback();
+                    confirmCallback = null;
+                }
+                confirmModalInstance.hide();
+            });
         });
+
+        // Función para mostrar alertas personalizadas
+        function mostrarAlerta(mensaje, tipo = 'info') {
+            const modalHeader = document.getElementById('alertModalHeader');
+            const modalTitle = document.getElementById('alertModalTitle');
+            const modalBody = document.getElementById('alertModalBody');
+            
+            // Limpiar clases anteriores
+            modalHeader.className = 'modal-header';
+            
+            // Configurar según el tipo
+            let icono = 'fa-info-circle';
+            let titulo = 'Información';
+            let colorClass = '';
+            
+            switch(tipo) {
+                case 'success':
+                    icono = 'fa-check-circle';
+                    titulo = 'Éxito';
+                    colorClass = 'bg-success';
+                    break;
+                case 'error':
+                    icono = 'fa-times-circle';
+                    titulo = 'Error';
+                    colorClass = 'bg-danger';
+                    break;
+                case 'warning':
+                    icono = 'fa-exclamation-triangle';
+                    titulo = 'Advertencia';
+                    colorClass = 'bg-warning';
+                    break;
+                default:
+                    colorClass = 'bg-primary';
+            }
+            
+            modalHeader.classList.add(colorClass);
+            modalTitle.innerHTML = `<i class="fas ${icono} me-2"></i>${titulo}`;
+            modalBody.textContent = mensaje;
+            
+            alertModalInstance.show();
+        }
+        
+        // Función para mostrar confirmaciones personalizadas
+        function mostrarConfirmacion(mensaje, callback) {
+            document.getElementById('confirmModalBody').textContent = mensaje;
+            confirmCallback = callback;
+            confirmModalInstance.show();
+        }
 
         function cerrarSesion() {
             logoutModal.show();
@@ -613,6 +803,25 @@ require_once 'php/verificar_sesion.php';
         // Funcion para confirmar y ejecutar el cierre de sesion
         function confirmarCerrarSesion() {
             window.location.href = 'php/logout.php';
+        }
+        
+        // Cargar medidas para el modal de edición
+        function cargarMedidasEdicion() {
+            const select = document.getElementById('editMedidaSelect');
+            if (!select) return;
+            
+            select.innerHTML = '<option value="">Seleccione una medida...</option>';
+            
+            if (typeof window.medidasDisponibles === 'undefined') {
+                return;
+            }
+            
+            window.medidasDisponibles.forEach(function(medida) {
+                const option = document.createElement('option');
+                option.value = medida.id;
+                option.textContent = medida.descripcion;
+                select.appendChild(option);
+            });
         }
     </script>
 
